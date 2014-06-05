@@ -11,13 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140604101012) do
+ActiveRecord::Schema.define(version: 20140605072324) do
 
   create_table "invitations", force: true do |t|
     t.string   "email"
     t.string   "name"
     t.string   "role"
     t.integer  "user_id"
+    t.string   "auth_token"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "projects", force: true do |t|
+    t.string   "name"
+    t.string   "address"
+    t.string   "contact_info"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -33,6 +42,9 @@ ActiveRecord::Schema.define(version: 20140604101012) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "authentication_token"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "role"

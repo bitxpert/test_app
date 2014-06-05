@@ -1,0 +1,25 @@
+    <h1 class = "text-center">Create Project</h1>
+      <%= form_for @project do |f| %>
+        <% if @project.errors.any? %>
+          <div class="error_messages">
+            <h2>Form is invalid</h2>
+            <ul>
+              <% for message in @project.errors.full_messages %>
+                <li>
+                <%= message %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+        <div class = "text-center">
+        <div class="input-lg">
+          <%= f.label :title %>
+          <%= f.text_field :title %>
+        </div>
+        </div>
+          <div class = "text-center">
+          <div style = "a"class="btn btn-default btn-lg" name "comit"><%= f.submit 'Create Project' , :class => 'btn btn-
+          primary' %></div>
+          </div>
+      <% end %>

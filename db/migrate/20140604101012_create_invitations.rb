@@ -6,6 +6,7 @@ class CreateInvitations < ActiveRecord::Migration
     	t.string 	:name
     	t.string 	:role
     	t.integer :user_id
+    	t.string     :auth_token	
 
       t.timestamps
     end

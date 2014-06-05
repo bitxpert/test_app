@@ -13,8 +13,10 @@ class InvitationsController < ApplicationController
 
 	def create
 		params[:invitation][:user_id] = current_user.id
+		params[:invitation][:auth_token] = SecureRandom.hex	
 		@invitation = Invitation.new(params_invitations)
-		UserMailer.invitation(params[:invitation][:email]).deliver
+		@base_url = request.host_with_port
+		UserMailer.invitation(params[:invitation][:email],params[:invitation][:auth_token],@base_url ).deliver
 		flash[:notice] = "Invitation was successfully created." if @invitation.save
 		respond_with @invitation
 	end
@@ -43,6 +45,6 @@ class InvitationsController < ApplicationController
 	private
 
 	def params_invitations
-		params.require(:invitation).permit(:email, :role, :user_id)
+		params.require(:invitation).permit(:email, :role, :user_id, :auth_token)
 	end	
 end
