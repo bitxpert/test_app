@@ -1,6 +1,7 @@
 class InvitationsController < ApplicationController
-
+	before_action :authenticate_user!
 	respond_to :html, :json
+
 	def index
 		@invitations = current_user.invitations
 		respond_with @invitations
@@ -16,8 +17,10 @@ class InvitationsController < ApplicationController
 		params[:invitation][:auth_token] = SecureRandom.hex	
 		@invitation = Invitation.new(params_invitations)
 		@base_url = request.host_with_port
+		if @invitation.save
+		flash[:notice] = "Invitation was successfully created." 
 		UserMailer.invitation(params[:invitation][:email],params[:invitation][:auth_token],@base_url ).deliver
-		flash[:notice] = "Invitation was successfully created." if @invitation.save
+		end
 		respond_with @invitation
 	end
 
@@ -33,13 +36,13 @@ class InvitationsController < ApplicationController
 
 	def update
 		@invitation = Invitation.find(params[:id])
-    flash[:notice] = 'Invitation was successfully updated.' if @invitation.update(params_invitations)
-    respond_with @invitation
+    	flash[:notice] = 'Invitation was successfully updated.' if @invitation.update(params_invitations)
+    	respond_with @invitation
 	end
 
 	def destroy
 		@invitation = Invitation.find(params[:id])
-    respond_with @invitation.destroy
+    	respond_with @invitation.destroy
 	end	
 
 	private

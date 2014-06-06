@@ -1,11 +1,19 @@
-
-<table class="table table-hover">
-	<tr>
-    	<th>Project ID</th>
-    	<th>Project Title</th>
-  	</tr>
-  	<tr>
-    	<td><%= @project.id %></td>
-    	<td><%= @project.title%></td>
-    </tr>
-</table>
+<table class="table table-bordered table-striped table-condensed">
+	<thead>
+    <th>Name</th>
+    <th>Contact Info</th>
+    <th>Address</th>
+    <th>Action</th>
+	</thead>	
+	<tbody>
+		<tr>
+			<td><%= @project.name %></td>
+			<td><%= @project.contact_info %></td>
+			<td><%= @project.address %></td>
+			<td>
+				<a href="<%= edit_project_path(@project.id) %>" class="btn btn-primary btn-sm">Edit</a>
+				<%= link_to 'Destroy', @project, :confirm => 'Are you sure?', :method => :delete %>
+				</td>
+		</tr>	
+	</tbody>	
+</table>	

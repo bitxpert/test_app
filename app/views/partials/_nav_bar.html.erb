@@ -16,6 +16,11 @@
       <ul class="nav navbar-nav">
         <li class="active"><a href="<%= new_invitation_path %>">Invite Users</a></li>
         <li><a href="<%= invitations_path %>">All Invitaions</a></li>
+        <% unless current_user.role == 'admin' %>
+          <li><a href="<%= new_project_path %>">Create Project</a></li>
+          <li><a href="<%= projects_path %>">All Projects</a></li> 
+        <% end %>   
+        
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="<%= destroy_user_session_path %>" data-method="delete">Log out</a></li>

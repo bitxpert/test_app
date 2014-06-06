@@ -1,0 +1,34 @@
+<%= form_for @project do |f| %>
+  <% if @project.errors.any? %>
+    <div class="error_messages">
+      <h2>Form is invalid</h2>
+      <ul>
+        <% for message in @project.errors.full_messages %>
+          <li>
+          <%= message %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class = "text-center">
+    <div class="input-lg">
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+    </div>
+    <div class="input-lg">
+      <%= f.label :contact_info %>
+      <%= f.text_field :contact_info %>
+    </div>
+    <div class="input-lg">
+      <%= f.label :address %>
+      <%= f.text_field :address %>
+    </div>
+  </div>
+  <div class = "text-center">
+    <div class="btn btn-default btn-lg" name "comit">
+      <%= f.submit 'Submit' , :class => 'btn btn-
+    primary' %>
+    </div>
+  </div>
+<% end %>

@@ -13,7 +13,11 @@
 <body>
 <%= render partial: "partials/nav_bar" if current_user.present? %>
 <%= render partial: "partials/landing_nav_bar" unless current_user.present? %>
+<% flash.each do |key, value| %>
+	<%= content_tag :div, value, class: "flash #{key}" %>
+<% end %>
 <%= yield %>
+
 
 </body>
 </html>

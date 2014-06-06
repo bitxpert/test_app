@@ -1,27 +1,25 @@
-    <table class="table table-striped">
-      <tr>
-        <th>Project ID</th>
-        <th>Project Title</th>
-        <th>Post</th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-      </tr>
-      <% @projects.each do |project| %>
-        
+<% if @projects.present? %>  
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <th>Name</th>
+      <th>Contact Info</th>
+      <th>Address</th>
+      <th>Action</th>
+    </thead>  
+    <tbody>
+      <% @projects.each do |project|%>
         <tr>
-          <td><%= project.id %></td>
-          <td><%= project.title%></td>
-          <td><%= link_to 'Show', project_path(project), :class => "btn btn-info" %></td>
-            <%if current_user.user_type != "manager" && User.find(current_user).projects.exists? == "false" || current_user.user_type == "manager"%>
-                <td>
-                    <%= link_to 'My Project', myproject_user_project_path(current_user, project), :class => "btn btn-small btn-success", :method => :post %>
-                </td>
-            <% end %>
+          <td><%= project.name %></td>
+          <td><%= project.contact_info %></td>
+          <td><%= project.address %></td>
           <td>
-          <%= link_to 'Create Bug', new_project_bug_path(project, Bug.new), :class => "btn btn-small btn-success" %>
-          </td>
-      </tr>
-    <% end %>
-    </table>
+            <a href="<%= edit_project_path(project.id) %>" class="btn btn-primary btn-sm">Edit</a>
+            <%= link_to 'Destroy', project, :confirm => 'Are you sure?', :method => :delete %>
+            </td>
+        </tr>
+      <% end %>   
+    </tbody>  
+  </table> 
+<% else %>
+  <b>No Project Present</b>
+<% end %>   

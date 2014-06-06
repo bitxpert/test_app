@@ -8,11 +8,7 @@ TestApp::Application.routes.draw do
 
     resources :invitations
 
-    resources :projects do 
-collection do
-      get 'allmyprojects'
-    end
-  end
+    resources :projects
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

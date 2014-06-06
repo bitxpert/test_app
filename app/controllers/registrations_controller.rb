@@ -1,50 +1,49 @@
  class RegistrationsController  < Devise::RegistrationsController
-  #before_filter :token_verification_of_referal
+  before_filter :token_verification_of_referal, :except => [:create] 
 
   def create
-    # sign_up_params.permit(:first_name, :last_name)
-    #return render json: sign_up_params
-    if Invitation.find_by_auth_token(allow_token[:auth_token]).present? 
-    build_resource(sign_up_params)
-
-    if resource.save
-      yield resource if block_given?
-      if resource.active_for_authentication?
-        set_flash_message :notice, :signed_up if is_flashing_format?
-        sign_up(resource_name, resource)
-        respond_with resource, location: after_sign_up_path_for(resource)
+    @invitation_row = Invitation.find_by_auth_token(allow_token[:auth_token]) 
+    if @invitation_row[:email] != sign_up_params[:email]
+      flash[:notice] = "Please Signup from reffered email address"
+      redirect_to new_user_registration_path(:auth_token => allow_token[:auth_token])
+    else
+      params[:user][:role] = @invitation_row.role
+      params[:user][:refrer] = @invitation_row.user_id
+      build_resource(sign_up_params)
+      if resource.save
+        Invitation.update(@invitation_row[:id], :auth_token => nil)
+        yield resource if block_given?
+        if resource.active_for_authentication?
+          set_flash_message :notice, :signed_up if is_flashing_format?
+          sign_up(resource_name, resource)
+          respond_with resource, location: after_sign_up_path_for(resource)
+        else
+          set_flash_message :notice, :"signed_up_but_#{resource.inactive_message}" if is_flashing_format?
+          expire_data_after_sign_in!
+          respond_with resource, location: after_inactive_sign_up_path_for(resource)
+        end
       else
-        set_flash_message :notice, :"signed_up_but_#{resource.inactive_message}" if is_flashing_format?
-        expire_data_after_sign_in!
-        respond_with resource, location: after_inactive_sign_up_path_for(resource)
+        clean_up_passwords resource
+        params[:auth_token] = allow_token[:auth_token]
+        respond_with resource
       end
-    else
-      clean_up_passwords resource
-      respond_with resource
-    end
-    else
-      flash[:error] = "Authentication tokken mismatch"
-      redirect_to root_path
-  end
+    end  
   end
  
-private
+  private
+ 
   def sign_up_params
-    params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :role)
+    params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :role, :refrer)
   end
+
   def allow_token
       params.require(:user).permit(:auth_token)
-      
   end
+
   def token_verification_of_referal
-    
-    
     if Invitation.find_by_auth_token(params[:auth_token]).present?
-      create
     else
-      flash[:error] = "Authentication tokken mismatch"
       redirect_to root_path
     end  
   end  
-
 end
