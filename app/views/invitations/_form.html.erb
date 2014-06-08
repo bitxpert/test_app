@@ -14,9 +14,9 @@
  	  <div>
 			<% if current_user.role == "admin" %>
   			<%= f.label :Role %>
-  			<%= f.select :role, options_for_select([['Client','client'],['Admin','admin']], :selected => @invitation.role.present? ? @invitation.role : "user"), {} %>
+  			<%= f.select :role, options_for_select([ [ GlobalConstants::Users::ROLES[:client].titleize, GlobalConstants::Users::ROLES[:client] ],[ GlobalConstants::Users::ROLES[:admin].titleize, GlobalConstants::Users::ROLES[:admin] ] ], selected: @invitation.role.present? ? @invitation.role : GlobalConstants::Users::ROLES[:client]), {} %>
   		<% else %>	
-  			<%= f.hidden_field :role, value: "user" %>
+  			<%= f.hidden_field :role, value: GlobalConstants::Users::ROLES[:subordinate] %>
   		<% end %>
  	  </div>
  	  <div>

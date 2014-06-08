@@ -11,7 +11,40 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140606061906) do
+ActiveRecord::Schema.define(version: 20140608104431) do
+
+  create_table "answers", force: true do |t|
+    t.integer  "project_id"
+    t.integer  "question_id"
+    t.integer  "status",      default: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "categories", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "incidents", force: true do |t|
+    t.string   "report_type"
+    t.string   "your_name"
+    t.string   "job_title"
+    t.date     "injury_date"
+    t.time     "injury_time"
+    t.string   "witnesses"
+    t.string   "location"
+    t.string   "circumstances"
+    t.string   "event_discription"
+    t.string   "injuries_type"
+    t.boolean  "ppe_used"
+    t.boolean  "medical_assistance_provided"
+    t.integer  "project_id"
+    t.integer  "downloaded"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "invitations", force: true do |t|
     t.string   "email"
@@ -28,9 +61,16 @@ ActiveRecord::Schema.define(version: 20140606061906) do
     t.string   "address"
     t.string   "contact_info"
     t.integer  "user_id"
+    t.integer  "creator_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "creator"
+  end
+
+  create_table "questions", force: true do |t|
+    t.text     "body"
+    t.integer  "category_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", force: true do |t|
@@ -50,7 +90,7 @@ ActiveRecord::Schema.define(version: 20140606061906) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "role"
-    t.integer  "refrer"
+    t.integer  "client_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

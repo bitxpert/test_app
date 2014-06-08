@@ -1,8 +1,8 @@
 <html>
 	<body>
 		<p>Invitation</p>
-		Hi <%= @token%>
-		<%= link_to "SignUp", "http://"+@base_url+new_user_registration_path(:auth_token => @token) %>
+		Hi <%= @email %>
+		<%= link_to "SignUp",  "http://#{@base_url}#{new_user_registration_path(auth_token: @token, email: @email)}" %>
 		
 		
 	</body>	

@@ -5,8 +5,8 @@ class CreateInvitations < ActiveRecord::Migration
     	t.string 	:email
     	t.string 	:name
     	t.string 	:role
-    	t.integer :user_id
-    	t.string     :auth_token	
+      t.integer :user_id
+    	t.string  :auth_token	
 
       t.timestamps
     end

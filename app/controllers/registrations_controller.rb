@@ -1,6 +1,15 @@
  class RegistrationsController  < Devise::RegistrationsController
   before_filter :token_verification_of_referal, :except => [:create] 
 
+  def new
+
+    if params[:email].present? && Invitation.find_by(email: CGI::unescape(params[:email])).present? 
+      super
+    else
+      redirect_to root_path
+    end
+  end
+
   def create
     @invitation_row = Invitation.find_by_auth_token(allow_token[:auth_token]) 
     if @invitation_row[:email] != sign_up_params[:email]
@@ -8,9 +17,15 @@
       redirect_to new_user_registration_path(:auth_token => allow_token[:auth_token])
     else
       params[:user][:role] = @invitation_row.role
-      params[:user][:refrer] = @invitation_row.user_id
+      if @invitation_row.role == GlobalConstants::Users::ROLES[:subordinate]
+        params[:user][:client_id] = @invitation_row.user_id
+      end
       build_resource(sign_up_params)
       if resource.save
+        if @invitation_row.role == GlobalConstants::Users::ROLES[:client]
+          resource.client_id = resource.id
+          resource.save!
+        end
         Invitation.update(@invitation_row[:id], :auth_token => nil)
         yield resource if block_given?
         if resource.active_for_authentication?
@@ -33,7 +48,7 @@
   private
  
   def sign_up_params
-    params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :role, :refrer)
+    params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :role, :client_id)
   end
 
   def allow_token
@@ -41,8 +56,7 @@
   end
 
   def token_verification_of_referal
-    if Invitation.find_by_auth_token(params[:auth_token]).present?
-    else
+    if Invitation.find_by_auth_token(params[:auth_token]).blank?
       redirect_to root_path
     end  
   end  

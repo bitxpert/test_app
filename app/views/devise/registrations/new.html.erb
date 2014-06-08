@@ -6,15 +6,21 @@
       <div class="account-wall">
         <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
           <%= devise_error_messages! %>
+          <div><%= f.label :email %>
+          <% if params[:email].present? %>
+            <%= params[:email] %>
+            <%= f.hidden_field :email, value: params[:email] %>
+
+          <% else %>
+            <br/>
+            <%= f.email_field :email, autofocus: true, class: "form-control" %></div>
+          <% end %>
 
           <div><%= f.label :first_name %><br />
           <%= f.text_field :first_name, autofocus: true, class: "form-control" %></div>
           
           <div><%= f.label :last_name %><br />
           <%= f.text_field :last_name, autofocus: true, class: "form-control" %></div>
-
-          <div><%= f.label :email %><br />
-          <%= f.email_field :email, autofocus: true, class: "form-control" %></div>
 
           <div><%= f.label :password %><br />
             <%= f.password_field :password, autocomplete: "off", class: "form-control" %></div>

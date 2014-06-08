@@ -1,34 +1,46 @@
-<%= form_for @project do |f| %>
-  <% if @project.errors.any? %>
-    <div class="error_messages">
-      <h2>Form is invalid</h2>
-      <ul>
-        <% for message in @project.errors.full_messages %>
-          <li>
-          <%= message %>
-          </li>
+<div class="row">
+  <div class="col-lg-6 col-lg-offset-3">
+    <%= form_for @project, html: { class: 'well form-horizontal', role: 'form'} do |f| %>
+
+      <fieldset>
+        <% if @project.errors.any? %>
+          <div class="alert alert-danger">
+            <h4><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h4>
+
+            <ul>
+            <% @project.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+            </ul>
+          </div>
         <% end %>
-      </ul>
-    </div>
-  <% end %>
-  <div class = "text-center">
-    <div class="input-lg">
-      <%= f.label :name %>
-      <%= f.text_field :name %>
-    </div>
-    <div class="input-lg">
-      <%= f.label :contact_info %>
-      <%= f.text_field :contact_info %>
-    </div>
-    <div class="input-lg">
-      <%= f.label :address %>
-      <%= f.text_field :address %>
-    </div>
+        <div class="form-group">
+          <%= f.label :name, class: "col-sm-3 control-label" %>
+          <div class="col-sm-9">
+            <%= f.text_field :name, class: "form-control" %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :address, class: "col-sm-3 control-label" %>
+          <div class="col-sm-9">
+            <%= f.text_field :address, class: "form-control" %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :contact_info, class: "col-sm-3 control-label" %>
+          <div class="col-sm-9">
+            <%= f.text_field :contact_info, class: "form-control" %>
+          </div>
+        </div>
+
+      </fieldset>
+
+      <div class="col-sm-offset-3">
+        <%= f.submit 'Save', class: "btn btn-primary" %>
+
+      </div>
+    <% end %>
   </div>
-  <div class = "text-center">
-    <div class="btn btn-default btn-lg" name "comit">
-      <%= f.submit 'Submit' , :class => 'btn btn-
-    primary' %>
-    </div>
-  </div>
-<% end %>
+</div>

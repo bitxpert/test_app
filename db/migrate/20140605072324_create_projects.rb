@@ -4,8 +4,8 @@ class CreateProjects < ActiveRecord::Migration
     	t.string 	:name
     	t.string 	:address
     	t.string 	:contact_info
-    	t.integer :user_id
-    	
+      t.integer :user_id
+    	t.integer :creator_id
       t.timestamps
     end
   end

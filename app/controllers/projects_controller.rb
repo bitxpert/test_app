@@ -1,10 +1,11 @@
 class ProjectsController < ApplicationController	
 	before_action :authenticate_user!
-	before_filter :check_user
-	respond_to :html, :json
+	before_action :check_user
+	before_action :set_project, only: [:show, :edit, :update, :destroy, :detail_report]
+	respond_to :html, :json, only: [:index, :new, :create, :edit, :update, :show, :destroy]
 	
 	def index
-		@projects = Project.where(:user_id => current_user.refrer)
+		@projects = current_user.whole_projects
 		respond_with @projects	
 	end	
 
@@ -14,40 +15,49 @@ class ProjectsController < ApplicationController
 	end
 
 	def create
-		params[:project][:user_id] = current_user.refrer
-		params[:project][:creator] = current_user.id 
-		@project = Project.new(params_project)
+		user_client = current_user.client
+		params[:project][:creator_id] = current_user.id 
+		@project = user_client.projects.build(params_project)
 		if @project.save
 		flash[:notice] = "Project was successfully created." 
 		end
 		respond_with @project
 	end	
 
-	def show 
-		@project = Project.find(params[:id])
-		respond_with @project
+	def show
+		@categories = Category.all.includes(:questions)
+		@answers = @project.answers
+		respond_with :obj => {project: @project, categories: @categories, answers: @answers}
 	end	
 
 	def edit
-		@project = Project.find(params[:id])
 		respond_with @project
 	end
 
 	def update
-		@project = Project.find(params[:id])
     	flash[:notice] = 'Project was successfully updated.' if @project.update(params_project)
     	respond_with @project	
 	end
 
 	def destroy
-		@project = Project.find(params[:id])
     	respond_with @project.destroy
 	end	
+
+	def detail_report
+  		respond_to do |format|
+    		format.html
+    		format.json
+    		format.pdf do
+      		pdf = ProjectDetailPdf.new(@project, view_context)
+      		send_data pdf.render, filename: "(#{@project.name}) project report.pdf", type: "application/pdf", disposition: "attachment"
+    		end
+ 		end
+	end
 
 	private
 
 	def params_project
-		params.require(:project).permit(:name, :contact_info, :address, :user_id, :creator)
+		params.require(:project).permit(:name, :contact_info, :address, :user_id, :creator_id)
 	end
 
 	def check_user
@@ -56,4 +66,8 @@ class ProjectsController < ApplicationController
 			return redirect_to root_url
 		end	
 	end	
+
+	def set_project
+		@project = current_user.whole_projects.find(params[:id])
+	end
 end
