@@ -33,7 +33,7 @@
       <% end %>   
     </tbody>  
   </table> 
-  <% if params[:inc].present? %>
+  <% if params[:inc].present? && Incident.find(params[:inc]).present? && Incident.find(params[:inc]).downloaded.blank? %>
     <%= hidden_field_tag :inc_id, params[:inc] %>
   <% end %>
 <% else %>
