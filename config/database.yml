@@ -4,7 +4,7 @@ development:
   database: test_app_development
   pool: 5
   username: root
-  password: zaqxsw
+  password: 
 
 test:
   adapter: mysql2
@@ -12,4 +12,4 @@ test:
   database: test_app_test
   pool: 5
   username: root
-  password: zaqxsw
+  password: 

@@ -3,8 +3,8 @@
 #
 # Examples:
 #
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+#   cities = City.create!([{ name: 'Chicago' }, { name: 'Copenhagen' }])
+#   Mayor.create!(name: 'Emanuel', city: cities.first)
 		User.create!(first_name: "Admin", email: "admin@gmail.com", password: "password", password_confirmation: "password", role: "admin")
 
 
@@ -14,7 +14,7 @@
 
 
 #create categories and their questions
-category = Category.create(name: "Admin")
+category = Category.create!(name: "Admin")
 [	
 	"Are computer workstations, background and screen lighting are compatible and adjustable?", 
 	"Are computer screen positions, chairs, and keyboard adjustable?", 
@@ -42,7 +42,7 @@ category = Category.create(name: "Admin")
   category.questions.create!(body: question_name)
 end
 
-category = Category.create(name: "Agriculture (Equipment Operators)")
+category = Category.create!(name: "Agriculture (Equipment Operators)")
 [
 	"Do tractors have roll over bars installed?", 
 	"Have seat belts been installed on tractors?", 
@@ -63,7 +63,7 @@ category = Category.create(name: "Agriculture (Equipment Operators)")
   category.questions.create!(body: question_name)
 end
 
-category = Category.create(name: "Agriculture (Field Work)")
+category = Category.create!(name: "Agriculture (Field Work)")
 [
 	"Are hand-held tools kept in good condition?", 
 	"Are short-handled hoes not used for cultivation?", 
@@ -76,7 +76,7 @@ category = Category.create(name: "Agriculture (Field Work)")
   category.questions.create!(body: question_name)
 end
 
-category = Category.create(name: "Carpentry")
+category = Category.create!(name: "Carpentry")
 [
 	"Is the portable power saw blade upper half permanently guarded; and the bottom half has a hinged guard?", 
 	"Do radial arm and table saws have anti-kickback devices installed?",
@@ -90,7 +90,7 @@ category = Category.create(name: "Carpentry")
   category.questions.create!(body: question_name)
 end
 
-category = Category.create(name: "Clearing and Grubbing")
+category = Category.create!(name: "Clearing and Grubbing")
 [
 	"Have all underground commodities, excavation limits, and buffer zones been identified on the excavation field map, and painted/marked out on the ground?",
 	"Has operator performed required daily equipment inspection?",
@@ -105,7 +105,7 @@ category = Category.create(name: "Clearing and Grubbing")
   category.questions.create!(body: question_name)
 end
 
-category = Category.create(name: "Compressed Air Receivers")
+category = Category.create!(name: "Compressed Air Receivers")
 [
 	"Is every receiver equipped with a pressure gauge and with one or more automatic, spring-loaded safety valves?",
 	"Is the total relieving capacity of the safety valve capable of preventing pressure in the receiver from exceeding the maximum allowable working pressure of the receiver by more than 10 percent?",
@@ -118,7 +118,7 @@ category = Category.create(name: "Compressed Air Receivers")
   category.questions.create!(body: question_name)
 end
 
-category = Category.create(name: "Compressed Gas and Cylinders")
+category = Category.create!(name: "Compressed Gas and Cylinders")
 [
 	"Are cylinders with a water weight capacity over 30 pounds equipped with means for connecting a valve protector device, or with a collar or recess to protect the valve?",
 	"Are cylinders legibly marked to clearly identify the gas contained?", 
@@ -134,7 +134,7 @@ category = Category.create(name: "Compressed Gas and Cylinders")
   category.questions.create!(body: question_name)
 end
 
-category = Category.create(name: "Compressors")
+category = Category.create!(name: "Compressors")
 [
 	"Are compressors equipped with pressure relief valves, and pressure gauges?", 
 	"Are compressor air intakes installed and equipped to ensure that only clean uncontaminated air enters the compressor?", 
@@ -157,7 +157,7 @@ category = Category.create(name: "Compressors")
   category.questions.create!(body: question_name)
 end
 
-category = Category.create(name: "Concrete Cutting")
+category = Category.create!(name: "Concrete Cutting")
 [
 	"Is the blade guard is present and intact?", 
 	"Is the guard firmly attached to the saw?", 
@@ -177,7 +177,7 @@ category = Category.create(name: "Concrete Cutting")
   category.questions.create!(body: question_name)
 end
 
-category = Category.create(name: "Confined Spaces")
+category = Category.create!(name: "Confined Spaces")
 [
 	"Are confined spaces thoroughly emptied of any corrosive or hazardous substances, such as acids or caustics, before entry?",
 	"Before entry, are all lines to a confined space, containing inert, toxic, flammable, or corrosive materials valved off and blanked or disconnected and separated?",
@@ -206,7 +206,7 @@ category = Category.create(name: "Confined Spaces")
 end
 
 
-category = Category.create(name: "Cranes")
+category = Category.create!(name: "Cranes")
 [
 	"Are the cranes visually inspected for defective components prior to the beginning of any work shift?",
 	"Are all electrically operated cranes effectively grounded? ",
@@ -224,7 +224,7 @@ category = Category.create(name: "Cranes")
   category.questions.create!(body: question_name)
 end
 
-category = Category.create(name: "Demolition")
+category = Category.create!(name: "Demolition")
 [
 	"Has a competent supervisor, experienced in demolition work, been appointed?",
 	"Are all onsite employees sufficiently trained and competent to complete their tasks and duties safely?",
@@ -253,7 +253,7 @@ category = Category.create(name: "Demolition")
   category.questions.create!(body: question_name)
 end
 
-category = Category.create(name: "Electrical")
+category = Category.create!(name: "Electrical")
 [
 	"Are your workplace electricians familiar with the Cal/OSHA Electrical Safety Orders?",
 	"Do you specify compliance with Cal/OSHA for all contract electrical work?",
@@ -294,7 +294,7 @@ category = Category.create(name: "Electrical")
 end
 
 
-category = Category.create(name: "Elevated Surfaces")
+category = Category.create!(name: "Elevated Surfaces")
 [
 	"Are signs posted, when appropriate, showing the elevated surface load capacity?",
 	"Are surfaces elevated more than 30 inches above the floor or ground provided with standard guardrails?",
@@ -307,7 +307,7 @@ category = Category.create(name: "Elevated Surfaces")
   category.questions.create!(body: question_name)
 end
 
-category = Category.create(name: "Emergency Action Plan")
+category = Category.create!(name: "Emergency Action Plan")
 [
 	"Are you required to have an emergency action plan?",
 	"Have emergency escape procedures and routes been developed and communicated to all employers?",
@@ -320,7 +320,7 @@ category = Category.create(name: "Emergency Action Plan")
   category.questions.create!(body: question_name)
 end
 
-category = Category.create(name: "Employer Posting")
+category = Category.create!(name: "Employer Posting")
 [
 "Is the OSHA poster Safety and Health Protection on the Job displayed in a prominent location where all employees are likely to see it?",
 "Are emergency telephone numbers posted where they can be readily found in case of emergency?",
@@ -332,7 +332,7 @@ category = Category.create(name: "Employer Posting")
   category.questions.create!(body: question_name)
 end
 
-category = Category.create(name: "Environmental Controls")
+category = Category.create!(name: "Environmental Controls")
 [
 "Are all work areas properly illuminated?",
 "Are employees instructed in proper first aid and other emergency procedures?",
@@ -370,7 +370,7 @@ category = Category.create(name: "Environmental Controls")
   category.questions.create!(body: question_name)
 end
 
-category = Category.create(name: "Ergonomics")
+category = Category.create!(name: "Ergonomics")
 [
 "Can the work be performed without eyestrain or glare to the employees?",
 "Does the task require prolonged raising of the arms?",
@@ -385,7 +385,7 @@ category = Category.create(name: "Ergonomics")
   category.questions.create!(body: question_name)
 end
 
-category = Category.create(name: "Excavation")
+category = Category.create!(name: "Excavation")
 [
 "Have the utility companies been adequately notified and the area marked?",
 "Has a permit been issued by for excavation 5 feet or deeper?",
@@ -398,7 +398,7 @@ category = Category.create(name: "Excavation")
   category.questions.create!(body: question_name)
 end
 
-category = Category.create(name: "Exit Doors")
+category = Category.create!(name: "Exit Doors")
 [
 "Are doors that are required to serve as exits designed and constructed so that the way of exit travel is obvious and direct?",
 "Are windows that could be mistaken for exit doors, made inaccessible by means of barriers or railings?",
@@ -412,7 +412,7 @@ category = Category.create(name: "Exit Doors")
   category.questions.create!(body: question_name)
 end
 
-category = Category.create(name: "Exits and Egress")
+category = Category.create!(name: "Exits and Egress")
 [
 "Are all exits marked with an exit sign and illuminated by a reliable light source?",
 "Are the directions to exits, when not immediately apparent, marked with visible signs?",
@@ -431,7 +431,7 @@ category = Category.create(name: "Exits and Egress")
   category.questions.create!(body: question_name)
 end
 
-category = Category.create(name: "Fire Protection")
+category = Category.create!(name: "Fire Protection")
 [
 "Do you have a fire prevention plan?",
 "Does your plan describe the type of fire protection equipment and/or systems?",
@@ -457,7 +457,7 @@ category = Category.create(name: "Fire Protection")
   category.questions.create!(body: question_name)
 end
 
-category = Category.create(name: "First Aid")
+category = Category.create!(name: "First Aid")
 [
 "Is there a hospital, clinic, or infirmary for medical care in proximity of your workplace?",
 "If medical and first aid facilities are not in proximity of your workplace is at least one employee on each shift currently alified to render first aid?",
@@ -470,7 +470,7 @@ category = Category.create(name: "First Aid")
   category.questions.create!(body: question_name)
 end
 
-category = Category.create(name: "Flammable Materials")
+category = Category.create!(name: "Flammable Materials")
 [
 "Are combustible scrap, debris and waste materials (i.e. oily rags) stored in covered metal receptacles and removed from the worksite promptly?",
 "Is proper storage practiced to minimize the risk of fire including spontaneous combustion?",
@@ -512,7 +512,7 @@ category = Category.create(name: "Flammable Materials")
   category.questions.create!(body: question_name)
 end
 
-category = Category.create(name: "Floor & Stair Openings")
+category = Category.create!(name: "Floor & Stair Openings")
 [
 "Are floor openings guarded by a cover, guardrail, or equivalent on all sides (except at entrance to stairways or ladders)?",
 "Are toeboards installed around the edges of a permanent floor opening (where persons may pass below the opening)?",
@@ -526,7 +526,7 @@ category = Category.create(name: "Floor & Stair Openings")
   category.questions.create!(body: question_name)
 end
 
-category = Category.create(name: "Food Service")
+category = Category.create!(name: "Food Service")
 [
 "Are floors free of grease, wet spots, debris?",
 "Are slip-resistant shoes worn by employees?",
@@ -554,7 +554,7 @@ category = Category.create(name: "Food Service")
   category.questions.create!(body: question_name)
 end
 
-category = Category.create(name: "Fork Lifts")
+category = Category.create!(name: "Fork Lifts")
 [
 "Are only trained personnel allowed to operate industrial trucks?",
 "Is substantial overhead protective equipment provided on high lift rider equipment?",
@@ -570,7 +570,7 @@ category = Category.create(name: "Fork Lifts")
   category.questions.create!(body: question_name)
 end
 
-category = Category.create(name: "Fueling")
+category = Category.create!(name: "Fueling")
 [
 "Is it prohibited to fuel an internal combustion engine with a flammable liquid while the engine is running?",
 "Are fueling operations done in such a manner that likelihood of spillage will be minimal?",
@@ -587,7 +587,7 @@ category = Category.create(name: "Fueling")
   category.questions.create!(body: question_name)
 end
 
-category = Category.create(name: "General")
+category = Category.create!(name: "General")
 [
 "Are all worksites clean and orderly?",
 "Are work surfaces kept dry or appropriate means taken to assure the surfaces are slip-resistant?",
@@ -607,7 +607,7 @@ category = Category.create(name: "General")
   category.questions.create!(body: question_name)
 end
 
-category = Category.create(name: "Grinders")
+category = Category.create!(name: "Grinders")
 [
 "Is the work rest used and kept adjusted to within 1/8 inch of the wheel?",
 "Is the adjustable tongue on the top side of the grinder used and kept adjusted to within 1/4 inch of the wheel?",
@@ -626,7 +626,7 @@ category = Category.create(name: "Grinders")
   category.questions.create!(body: question_name)
 end
 
-category = Category.create(name: "Hand Tools")
+category = Category.create!(name: "Hand Tools")
 [
 "Are all tools and equipment (both, company and employee-owned) used by employees at their workplace in good condition?",
 "Are hand tools such as chisels, punches, which develop mushroomed heads during use, reconditioned or replaced as necessary?",
@@ -655,7 +655,7 @@ category = Category.create(name: "Hand Tools")
   category.questions.create!(body: question_name)
 end
 
-category = Category.create(name: "Hazardous Chemical Exposures")
+category = Category.create!(name: "Hazardous Chemical Exposures")
 [
 "Are employees trained in the safe handling practices of hazardous chemicals such as acids, caustics, and the like?",
 "Are employees aware of the potential hazards involving various chemicals stored or used in the workplace such as acids, bases, caustics, epoxies, and phenols?",
@@ -691,7 +691,7 @@ category = Category.create(name: "Hazardous Chemical Exposures")
   category.questions.create!(body: question_name)
 end
 
-category = Category.create(name: "Hazardous Substances Communication")
+category = Category.create!(name: "Hazardous Substances Communication")
 [
 "Is there a list of hazardous substances used in your workplace?",
 "Is there a written hazard communication program dealing with Material Safety Data Sheets (MSDS) labeling, and employee training?","Who is responsible for MSDSs, container labeling, employee training?",
@@ -711,7 +711,7 @@ category = Category.create(name: "Hazardous Substances Communication")
   category.questions.create!(body: question_name)
 end
 
-category = Category.create(name: "Hoisting Equipment")
+category = Category.create!(name: "Hoisting Equipment")
 [
 "Is each overhead electric hoist equipped with a limit device to stop the hook travel at its highest and lowest point of safe travel?",
 "Will each hoist automatically stop and hold any load up to 125 percent of its rated load, if its actuating force is removed?",
@@ -730,7 +730,7 @@ category = Category.create(name: "Hoisting Equipment")
   category.questions.create!(body: question_name)
 end
 
-category = Category.create(name: "Housekeeping")
+category = Category.create!(name: "Housekeeping")
 [
 "Is proper ventilation and illumination adequate in all areas?",
 "Are aisles and passageways clear and unobstructed?",
@@ -754,7 +754,7 @@ category = Category.create(name: "Housekeeping")
   category.questions.create!(body: question_name)
 end
 
-category = Category.create(name: "Infection Control")
+category = Category.create!(name: "Infection Control")
 [
 "Are employees potentially exposed to infectious agents in body fluids?",
 "Have occasions of potential occupational exposure been identified and documented?",
@@ -776,7 +776,7 @@ category = Category.create(name: "Infection Control")
   category.questions.create!(body: question_name)
 end
 
-category = Category.create(name: "Jackhammering")
+category = Category.create!(name: "Jackhammering")
 [
 "Are employees wearing proper PPE: eye protection, steel-toed boots, hearing protection; and safety gloves?",
 "Are workers rotating, whenever possible, when jackhammering for extended periods of time?",
@@ -794,7 +794,7 @@ category = Category.create(name: "Jackhammering")
   category.questions.create!(body: question_name)
 end
 
-category = Category.create(name: "Ladders")
+category = Category.create!(name: "Ladders")
 [
 "Are all ladders maintained in good condition, joints between steps and side rails tight, all hardware and fittings securely attached, and moveable parts operating freely without binding or undue play?",
 "Are non-slip safety feet provided on each ladder?",
@@ -816,7 +816,7 @@ category = Category.create(name: "Ladders")
   category.questions.create!(body: question_name)
 end
 
-category = Category.create(name: "Lockout/Tagout")
+category = Category.create!(name: "Lockout/Tagout")
 [
 "Is all machinery or equipment capable of movement, required to be de-energized or disengaged and blocked or locked out during cleaning, servicing, adjusting or setting up operations, whenever required?",
 "Is the locking-out of control circuits in lieu of locking-out main power disconnects prohibited?",
@@ -866,7 +866,7 @@ category = Category.create(name: "Lockout/Tagout")
   category.questions.create!(body: question_name)
 end
 
-category = Category.create(name: "Machine Guarding")
+category = Category.create!(name: "Machine Guarding")
 [
 "Is there a training program to instruct employees on safe methods of machine operation?",
 "Is there adequate supervision to ensure that employees are following safe machine operating procedures?",
@@ -898,7 +898,7 @@ category = Category.create(name: "Machine Guarding")
   category.questions.create!(body: question_name)
 end
 
-category = Category.create(name: "Machine Shop")
+category = Category.create!(name: "Machine Shop")
 [
 "Are ladders in good condition, equipped with safety treads and are metal ladders marked properly?",
 "Are all electric and gasoline powered equipment in good repair?",
@@ -921,7 +921,7 @@ category = Category.create(name: "Machine Shop")
   category.questions.create!(body: question_name)
 end
 
-category = Category.create(name: "Manufacturing (Maintenance)")
+category = Category.create!(name: "Manufacturing (Maintenance)")
 [
 "Is the welding area ventilation hood working properly during welding operations?",
 "Are grinding wheels equipped with properly adjusted safety shields and tool rests?",
@@ -937,7 +937,7 @@ category = Category.create(name: "Manufacturing (Maintenance)")
   category.questions.create!(body: question_name)
 end
 
-category = Category.create(name: "Manufacturing (Material Handling)")
+category = Category.create!(name: "Manufacturing (Material Handling)")
 [
 "Are proper lifting techniques consistent with training (e.g., back injury prevention training) being used?",
 "Are multiple caseloads placed on pallets and only moved with a pallet lift? or by a forklift?",
@@ -952,7 +952,7 @@ category = Category.create(name: "Manufacturing (Material Handling)")
   category.questions.create!(body: question_name)
 end
 
-category = Category.create(name: "Manufacturing (Operators)")
+category = Category.create!(name: "Manufacturing (Operators)")
 [
 "Are designated employees trained to respond to a fire or other emergencies?",
 "Are 'No horseplay' or use of intoxicating substances being done on the premises?",
@@ -971,7 +971,7 @@ Do operators notify maintenance immediately if the ventilation system is not wor
   category.questions.create!(body: question_name)
 end
 
-category = Category.create(name: "Material Handling")
+category = Category.create!(name: "Material Handling")
 [
 "Is there safe clearance for equipment through aisles and doorways?",
 "Are aisleways designated, permanently marked, and kept clear to allow unhindered passage?",
@@ -994,7 +994,7 @@ category = Category.create(name: "Material Handling")
   category.questions.create!(body: question_name)
 end
 
-category = Category.create(name: "Noise")
+category = Category.create!(name: "Noise")
 [
 "Are there areas in the workplace where continuous noise levels exceed 85 dBA? (To determine maximum allowable levels for intermittent or impact noise, see Title 8, Section 5097.)",
 "Are noise levels being measured using a sound level meter or an octave band analyzer and records being kept?",
@@ -1011,7 +1011,7 @@ category = Category.create(name: "Noise")
   category.questions.create!(body: question_name)
 end
 
-category = Category.create(name: "Painting-Glazing")
+category = Category.create!(name: "Painting-Glazing")
 [
 "Are ladders placed so that the side rails have secure footing.?",
 "Is the topcap or the step below the topcap of stepladders not used as steps?",
@@ -1025,7 +1025,7 @@ category = Category.create(name: "Painting-Glazing")
   category.questions.create!(body: question_name)
 end
 
-category = Category.create(name: "Piping")
+category = Category.create!(name: "Piping")
 [
 "When nonpotable water is piped through a facility, are outlets or taps posted to alert employees that it is unsafe and not to be used for drinking, washing or other personal use?",
 "When hazardous substances are transported through above ground piping, is each pipeline identified at points where confusion could introduce hazards to employees?",
@@ -1039,7 +1039,7 @@ category = Category.create(name: "Piping")
   category.questions.create!(body: question_name)
 end
 
-category = Category.create(name: "Powder-Actuated Tools")
+category = Category.create!(name: "Powder-Actuated Tools")
 [
 "Are employees who operate powder-actuated tools trained in their use and carry a valid operator's card?",
 "Do the powder-actuated tools being used have written approval of the Division of Occupational Safety and Health?",
@@ -1052,7 +1052,7 @@ category = Category.create(name: "Powder-Actuated Tools")
   category.questions.create!(body: question_name)
 end
 
-category = Category.create(name: "PPE")
+category = Category.create!(name: "PPE")
 [
 "Are protective goggles or face shields provided and worn where there is any danger of flying particles or corrosive materials?",
 "Are approved safety glasses required to be worn at all times in areas where there is a risk of eye injuries such as punctures, abrasions, contusions or burns?",
@@ -1071,7 +1071,7 @@ category = Category.create(name: "PPE")
   category.questions.create!(body: question_name)
 end
 
-category = Category.create(name: "Recordkeeping")
+category = Category.create!(name: "Recordkeeping")
 [
 "Are all occupational injury or illnesses, except minor injuries requiring only first aid, being recorded as required on the OSHA Form 300?",
 "Are employee medical records and records of employee exposure to toxic substances or harmful physical agents up-to-date?",
@@ -1085,7 +1085,7 @@ category = Category.create(name: "Recordkeeping")
   category.questions.create!(body: question_name)
 end
 
-category = Category.create(name: "Rolling Towers")
+category = Category.create!(name: "Rolling Towers")
 [
 "Are outriggers (if required) properly installed on both sides of rolling towers?",
 "Are platforms fully planked with no gaps greater than 1 inch?",
@@ -1097,7 +1097,7 @@ category = Category.create(name: "Rolling Towers")
   category.questions.create!(body: question_name)
 end
 
-category = Category.create(name: "Scaffold")
+category = Category.create!(name: "Scaffold")
 [
 "Are Sills properly placed and adequately sized?",
 "Have screw jacks been used to level and plumb scaffold instead of unsafe objects such as concrete blocks?",
@@ -1118,7 +1118,7 @@ category = Category.create(name: "Scaffold")
   category.questions.create!(body: question_name)
 end
 
-category = Category.create(name: "Sanitizing Equipment and Clothing")
+category = Category.create!(name: "Sanitizing Equipment and Clothing")
 [
 "Is personal protective clothing or equipment, that employees are required to wear or use, of a type capable of being easily cleaned and disinfected?",
 "Are employees prohibited from interchanging personal protective clothing or equipment, unless it has been properly cleaned?",
@@ -1131,7 +1131,7 @@ category = Category.create(name: "Sanitizing Equipment and Clothing")
   category.questions.create!(body: question_name)
 end
 
-category = Category.create(name: "Spraying Operations")
+category = Category.create!(name: "Spraying Operations")
 [
 "Is adequate ventilation assured before spray operations are started?",
 "Is mechanical ventilation provided when spraying operation is done in enclosed areas?",
@@ -1158,7 +1158,7 @@ category = Category.create(name: "Spraying Operations")
   category.questions.create!(body: question_name)
 end
 
-category = Category.create(name: "Stairways")
+category = Category.create!(name: "Stairways")
 [
 "Are standard stair rails or handrails on all stairways having four or more risers?",
 "Are all stairways at least 22 inches wide?",
@@ -1177,7 +1177,7 @@ category = Category.create(name: "Stairways")
   category.questions.create!(body: question_name)
 end
 
-category = Category.create(name: "Steel")
+category = Category.create!(name: "Steel")
 [
 "Has shop detailer provided a marking plan?",
 "Has structural design engineer reviewed and approved drawings?",
@@ -1188,7 +1188,7 @@ category = Category.create(name: "Steel")
   category.questions.create!(body: question_name)
 end
 
-category = Category.create(name: "Tire Inflation")
+category = Category.create!(name: "Tire Inflation")
 [
 "Where tires are mounted and/or inflated on drop center wheels is a safe practice procedure posted and enforced?",
 "Where tires are mounted and/or inflated on wheels with split rims and/or retainer rings is a safe practice procedure posted and enforced?",
@@ -1200,7 +1200,7 @@ category = Category.create(name: "Tire Inflation")
   category.questions.create!(body: question_name)
 end
 
-category = Category.create(name: "Traffic Control")
+category = Category.create!(name: "Traffic Control")
 [
 "Has the work area been evaluated for hazards?",
 "Has the emergency vehicle been positioned properly?",
@@ -1220,7 +1220,7 @@ category = Category.create(name: "Traffic Control")
   category.questions.create!(body: question_name)
 end
 
-category = Category.create(name: "Train Crossings")
+category = Category.create!(name: "Train Crossings")
 [
 "Is the level of protection (eg Give Way Signs, Stop Signs, Flashing Lights, Boom Barriers) in accordance with guidelines?",
 "Are required sight distances likely to be restricted by future vegetation growth?",
@@ -1280,7 +1280,7 @@ category = Category.create(name: "Train Crossings")
   category.questions.create!(body: question_name)
 end
 
-category = Category.create(name: "Transporting")
+category = Category.create!(name: "Transporting")
 [
 "Do employees who operate vehicles on public thoroughfares have valid operator's licenses?",
 "When seven or more employees are regularly transported in a van, bus or truck, is the operator's license appropriate for the class of vehicle being driven?",
@@ -1297,7 +1297,7 @@ category = Category.create(name: "Transporting")
 end
 
 
-category = Category.create(name: "Ventilation")
+category = Category.create!(name: "Ventilation")
 [
 "Is the volume and velocity of air in each exhaust system sufficient to gather the dusts, fumes, mists, vapors or gases to be controlled, and to convey them to a suitable point of disposal?",
 "Are exhaust inlets, ducts and plenums designed, constructed, and supported to prevent collapse or failure of any part of the system?",
@@ -1313,7 +1313,7 @@ category = Category.create(name: "Ventilation")
   category.questions.create!(body: question_name)
 end
 
-category = Category.create(name: "Walkways")
+category = Category.create!(name: "Walkways")
 [
 "Are aisles and passageways kept clear?",
 "Are aisles and walkways marked as appropriate?",
@@ -1330,7 +1330,7 @@ category = Category.create(name: "Walkways")
   category.questions.create!(body: question_name)
 end
 
-category = Category.create(name: "Welding, Cutting, and Brazing")
+category = Category.create!(name: "Welding, Cutting, and Brazing")
 [
 "Are only authorized and trained personnel permitted to use welding, cutting or brazing equipment?",
 "Do all operator have a copy of the appropriate operating instructions and are they directed to follow them? ",
