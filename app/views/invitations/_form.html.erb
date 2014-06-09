@@ -1,5 +1,7 @@
-<div class="text-center">
-	<%= form_for @invitation do |f| %>
+<%= stylesheet_link_tag "invitation.css" %>
+<%= hidden_field_tag 'active_class', 'invite_user'%>
+<div class=" well style text-center">
+	<%= form_for @invitation,:html => { :class => 'form-horizontal' } do |f| %>
 	<% if @invitation.errors.any? %>
 		<div>
 		  <% @invitation.errors.full_messages.each do |msg| %>
@@ -11,16 +13,18 @@
 			<%= f.label :email %>
   		<%= f.email_field :email, autofocus: true %>
  	  </div>
- 	  <div>
-			<% if current_user.role == "admin" %>
+ 	  <div class="div">
+		<% if current_user.role == "admin" %>
+		
   			<%= f.label :Role %>
-  			<%= f.select :role, options_for_select([ [ GlobalConstants::Users::ROLES[:client].titleize, GlobalConstants::Users::ROLES[:client] ],[ GlobalConstants::Users::ROLES[:admin].titleize, GlobalConstants::Users::ROLES[:admin] ] ], selected: @invitation.role.present? ? @invitation.role : GlobalConstants::Users::ROLES[:client]), {} %>
+  			<%= f.select :role, options_for_select([ [ GlobalConstants::Users::ROLES[:client].titleize, GlobalConstants::Users::ROLES[:client] ],[ GlobalConstants::Users::ROLES[:admin].titleize, GlobalConstants::Users::ROLES[:admin] ] ], selected: @invitation.role.present? ? @invitation.role : GlobalConstants::Users::ROLES[:client]), {},{ :class => 'select-role' } %>
   		<% else %>	
   			<%= f.hidden_field :role, value: GlobalConstants::Users::ROLES[:subordinate] %>
   		<% end %>
  	  </div>
  	  <div>
- 	  	<%= f.submit "Submit", class: "btn btn-primary btn-sm"%>
- 	  </div>	
+ 	  	<%= f.submit "Submit", class: "btn btn-primary btn-sm pull-right"%>
+ 	  </div>
+ 	  <br/>	
 	<% end %>
 </div>	
