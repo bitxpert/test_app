@@ -13,7 +13,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-# gem 'therubyracer', platforms: :ruby
+gem 'therubyracer', platforms: :ruby
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -30,7 +30,7 @@ gem 'devise'
 
 # Database
 gem 'mysql2'
-
+gem 'execjs'
 # Sending Email
 gem 'mailit'
 
@@ -42,7 +42,7 @@ end
 gem 'prawn'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-
+gem 'aescrypt'
 # Use unicorn as the app server
 # gem 'unicorn'
 

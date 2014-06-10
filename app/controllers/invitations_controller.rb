@@ -3,7 +3,8 @@ class InvitationsController < ApplicationController
 	respond_to :html, :json
 
 	def index
-		@invitations = current_user.invitations
+		# @invitations = current_user.invitations
+		@invitations = User.all
 		respond_with @invitations
 	end
 		
@@ -12,12 +13,19 @@ class InvitationsController < ApplicationController
 			redirect_to root_path
 		else
 			@invitation = Invitation.new
+			# @invitation = User.new
 			respond_with @invitation
 		end
 	end
 
 	def create
-
+		# user = User.new
+		# user.email = params[:invitation][:email]
+		# user.password = params[:invitation][:password]
+		# user.save!
+		# flash[:success] = "successfully Saved."
+		# redirect_to invitations_path
+		
 		params[:invitation][:user_id] = current_user.id
 		params[:invitation][:auth_token] = SecureRandom.hex	
 		@invitation = Invitation.new(params_invitations)
@@ -57,6 +65,6 @@ class InvitationsController < ApplicationController
 	private
 
 	def params_invitations
-		params.require(:invitation).permit(:email, :role, :user_id, :auth_token)
+		params.require(:invitation).permit(:email, :role, :user_id, :auth_token, :password)
 	end	
 end

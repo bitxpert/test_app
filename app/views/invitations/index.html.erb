@@ -1,3 +1,4 @@
+<%= hidden_field_tag 'active_class', 'invitations'%>
 <% if @invitations.present? %>
 	<table class="table table-bordered table-striped table-condensed">
 		<thead>
@@ -13,8 +14,8 @@
 					<td><%= invitation.role %></td>
 					<td></td>
 					<td>
-						<a href="<%= edit_invitation_path(invitation.id) %>" class="btn btn-primary btn-sm">Edit</a>
-						<%= link_to 'Destroy', invitation, :confirm => 'Are you sure?', :method => :delete %>
+						<!-- <a href="<%= edit_user_registration_path(invitation.id) %>" class="btn btn-primary btn-sm">Edit</a> -->
+						<%= link_to 'Destroy', user_registration_path(invitation), :confirm => 'Are you sure?', :method => :delete, :class=>"btn btn-danger btn-xs" %>
 						</td>
 				</tr>	
 			<% end %>

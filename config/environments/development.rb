@@ -29,11 +29,11 @@ TestApp::Application.configure do
   ActionMailer::Base.perform_deliveries = true
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
   ActionMailer::Base.smtp_settings = {
-  :address              => "smtp.gmail.com",
+  :address              => "smtp.mandrillapp.com",
   :port                 => "587",
-  :domain               => 'gmail.com',
-  :user_name            => 'testdevsinc@gmail.com',
-  :password             => 'hellotest123',
+  :domain               => 'codingqna.com',
+  :user_name            => 'mail.usmanasif@gmail.com',
+  :password             => 'pBov4cqKNHaJO4TpxLlxLQ',
   :authentication       => 'plain',
   :enable_starttls_auto => true  }
   config.assets.debug = true

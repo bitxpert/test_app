@@ -10,7 +10,7 @@ class ProjectDetailPdf < Prawn::Document
   def project_heading
     text  "<u>Detailed View of project #{@project.name}</u>", size: 25, style: :bold, align: :center, inline_format: true
 
-    data = [ ["Address:", @project.address ],[  "Contect Information:", @project.contact_info ]]
+    data = [ ["Address:", @project.address ],[  "Contact Information:", @project.contact_info ]]
   
     move_down 20
     table(data, cell_style: {border_width: 0}) do

@@ -1,3 +1,10 @@
+<script type="text/javascript">
+  $(document).ready(function(){
+      $("."+ $("#active_class").val()).addClass("active");
+        // $(".active_class").removeClass("active");
+        // $(this).addClass("active");
+  });
+</script>
 <nav class="navbar navbar-default" role="navigation">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -14,11 +21,12 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="<%= new_invitation_path %>">Invite Users</a></li>
-        <li><a href="<%= invitations_path %>">All Invitaions</a></li>
+        <li class="settings"><a href="javascript:void(0)">Settings</a></li>
+        <li class="invitations"><a href="<%= invitations_path %>">List Users</a></li>
+        <li class="invite_user"><a href="<%= new_invitation_path %>">Add User</a></li>
         <% unless current_user.role == 'admin' %>
-          <li><a href="<%= new_project_path %>">Create Project</a></li>
-          <li><a href="<%= projects_path %>">All Projects</a></li> 
+          <li class="all_projects"><a href="<%= projects_path %>">List Projects</a></li> 
+          <li class="create_project"><a href="<%= new_project_path %>">Add Project</a></li>
         <% end %>   
         
       </ul>

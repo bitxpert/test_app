@@ -7,7 +7,7 @@
 
   });  
 </script>
-
+<%= hidden_field_tag 'active_class', 'all_projects'%>
 <% if @projects.present? %>  
   <table class="table table-bordered table-striped table-condensed">
     <thead>
@@ -19,14 +19,14 @@
     <tbody>
       <% @projects.each do |project|%>
         <tr>
-          <td><%= project.name %></td>
+          <td><%= link_to project.name, project_path(project)%></td>
           <td><%= project.contact_info %></td>
           <td><%= project.address %></td>
           <td>
-            <%= link_to "show", project_path(project), class: "btn btn-default btn-sm" %>
-            <%= link_to "download detail report", detail_report_project_path(project, { format: :pdf}), class: "btn btn-sm btn-info" %>
-            <%= link_to "send incident", new_project_incident_path(project), class: "btn btn-sm btn-primary" %>
-            <%= link_to "view its incidents", project_incidents_path(project), class: "btn btn-sm btn-success" %>
+            <%#= link_to "show", project_path(project), class: "btn btn-default btn-sm" %>
+            <%= link_to "Download Detailed Report", detail_report_project_path(project, { format: :pdf}), class: "btn btn-sm btn-info" %>
+            <%= link_to "Send Incident Report", project_incidents_path(project), class: "btn btn-sm btn-primary" %>
+            <%= link_to "Create Incident Report", new_project_incident_path(project), class: "btn btn-sm btn-success" %>
             <%= link_to 'Destroy', project, data: { confirm: 'Are you sure?' }, method: :delete, class: "btn btn-sm btn-danger" %>
             </td>
         </tr>
