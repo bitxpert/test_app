@@ -76,13 +76,13 @@ class IncidentsController < ApplicationController
       format.html
       format.json
       format.pdf do
-        if @incident.downloaded.blank?
+        # if @incident.downloaded.blank?
           pdf = IncidentPdf.new(@incident)
           @incident.update!(downloaded: true)
           send_data pdf.render, filename: "(Your new Incident on project #{@incident.project.name}).pdf", type: "application/pdf", disposition: "attachment"
-        else
-          redirect_to projects_path
-        end
+        # else
+          # redirect_to projects_path
+        # end
       end
     end
   end

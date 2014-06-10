@@ -21,11 +21,12 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="invite_user"><a href="<%= new_invitation_path %>">Invite Users</a></li>
-        <li class="invitations"><a href="<%= invitations_path %>">All Invitaions</a></li>
+        <li class="settings"><a href="javascript:void(0)">Settings</a></li>
+        <li class="invitations"><a href="<%= invitations_path %>">List Users</a></li>
+        <li class="invite_user"><a href="<%= new_invitation_path %>">Add User</a></li>
         <% unless current_user.role == 'admin' %>
-          <li class="create_project"><a href="<%= new_project_path %>">Create Project</a></li>
-          <li class="all_projects"><a href="<%= projects_path %>">All Projects</a></li> 
+          <li class="all_projects"><a href="<%= projects_path %>">List Projects</a></li> 
+          <li class="create_project"><a href="<%= new_project_path %>">Add Project</a></li>
         <% end %>   
         
       </ul>

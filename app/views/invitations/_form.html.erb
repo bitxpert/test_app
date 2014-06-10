@@ -1,7 +1,7 @@
 <%= stylesheet_link_tag "invitation.css" %>
 <%= hidden_field_tag 'active_class', 'invite_user'%>
 <div class=" well style text-center">
-	<%= form_for @invitation,:html => { :class => 'form-horizontal' } do |f| %>
+	<%= form_for @invitation,:url=>user_registration_path,:html => { :class => 'form-horizontal' } do |f| %>
 	<% if @invitation.errors.any? %>
 		<div>
 		  <% @invitation.errors.full_messages.each do |msg| %>
@@ -12,6 +12,10 @@
 		<div>
 			<%= f.label :email %>
   		<%= f.email_field :email, autofocus: true %>
+ 	  </div>
+ 	  <div>
+		<%= f.label :password %>
+  		<%= f.text_field :password %>
  	  </div>
  	  <div class="div">
 		<% if current_user.role == "admin" %>
