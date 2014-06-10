@@ -1,13 +1,8 @@
  class RegistrationsController  < Devise::RegistrationsController
-  before_filter :token_verification_of_referal, :except => [:create] 
+  # before_filter :token_verification_of_referal, :except => [:create] 
+  before_filter :admin_or_client_only, only: [:new, :create]
 
   def new
-
-    if params[:email].present? && Invitation.find_by(email: CGI::unescape(params[:email])).present? 
-      super
-    else
-      redirect_to root_path
-    end
   end
 
   def create

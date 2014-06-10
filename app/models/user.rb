@@ -16,7 +16,12 @@ class User < ActiveRecord::Base
   def whole_projects
   	self.client.projects
   end
-
+  def admin?
+    self.role == "admin"
+  end
+  def client?
+    self.role == "client"
+  end
   # def password
   #   key = "helloworld123"
   #   encrypted_data = read_attribute(:password)

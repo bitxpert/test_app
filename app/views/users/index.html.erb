@@ -1,0 +1,32 @@
+<% if @users.present? %>
+	<table class="table table-bordered table-striped table-condensed">
+		<thead>
+			<th>Email</th>
+			<th>Role</th>
+			<th>Status</th>
+			<th>Settings</th>
+			<th>Action</th>
+		</thead>	
+		<tbody>
+			<% @users.each do |user| %>
+				<tr>
+					<td><%= user.email %></td>
+					<td><%= user.role %></td>
+					<td></td>
+					<td>
+						<!-- <a href="<%= edit_user_registration_path(user.id) %>" class="btn btn-primary btn-sm">Edit</a> -->
+						<%= link_to 'Settings', edit_user_path(user), :class=>"btn btn-danger btn-xs" %>
+						</td>
+					<td>
+						<!-- <a href="<%= edit_user_registration_path(user.id) %>" class="btn btn-primary btn-sm">Edit</a> -->
+						<%= link_to 'Destroy', user_registration_path(user), :confirm => 'Are you sure?', :method => :delete, :class=>"btn btn-danger btn-xs" %>
+						</td>
+				</tr>	
+			<% end %>
+		</tbody>	
+	</table>	
+<% else %>
+	<div class="text-center">
+		<b>No invitaion present</b>
+	</div>	
+<% end %>

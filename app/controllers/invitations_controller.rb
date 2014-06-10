@@ -1,6 +1,7 @@
 class InvitationsController < ApplicationController
 	before_action :authenticate_user!
 	respond_to :html, :json
+ before_filter :admin_or_client_only, only: [:new, :create]
 
 	def index
 		# @invitations = current_user.invitations
@@ -12,7 +13,7 @@ class InvitationsController < ApplicationController
 		if current_user.role == GlobalConstants::Users::ROLES[:subordinate]
 			redirect_to root_path
 		else
-			@invitation = Invitation.new
+			@resource = User.new
 			# @invitation = User.new
 			respond_with @invitation
 		end

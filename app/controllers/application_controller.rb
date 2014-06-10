@@ -9,7 +9,10 @@ class ApplicationController < ActionController::Base
     nil
   end
 
-  def after_sign_in_path_for(resource)
-  	new_invitation_url
+  def admin_or_client_only
+    if current_user.admin? || current_user.client?
+    else
+      return redirect_to root_path 
+    end
   end
 end

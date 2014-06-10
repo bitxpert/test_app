@@ -21,9 +21,10 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="settings"><a href="javascript:void(0)">Settings</a></li>
-        <li class="invitations"><a href="<%= invitations_path %>">List Users</a></li>
-        <li class="invite_user"><a href="<%= new_invitation_path %>">Add User</a></li>
+      <% unless current_user.role == 'user' %>
+        <li class="invitations"><a href="<%= users_path %>">List Users</a></li>
+        <li class="invite_user"><a href="<%= new_user_path %>">Add User</a></li>
+        <% end %>
         <% unless current_user.role == 'admin' %>
           <li class="all_projects"><a href="<%= projects_path %>">List Projects</a></li> 
           <li class="create_project"><a href="<%= new_project_path %>">Add Project</a></li>
@@ -32,7 +33,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <% if user_signed_in? %>
-          <li><%= link_to  current_user.email, "javascript:void(0);" %></li>
+          <li><%= link_to  current_user.email, edit_user_path(current_user) %></li>
           <li><a href="<%= destroy_user_session_path %>" data-method="delete">Log out</a></li>
         <% end %>
       </ul>
