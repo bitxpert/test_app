@@ -30,6 +30,8 @@
 			<td><%= @project.address %></td>
 			<td>
             	<%= link_to "Edit", edit_project_path(@project), class: "btn btn-default btn-sm" %>
+            	            <%= link_to "View Past Reports", project_reports_path(project), class: "btn btn-sm btn-warning" %>
+
 				<%= link_to "download detail report", detail_report_project_path(@project, { format: :pdf}), class: "btn btn-sm btn-info" %>
 				<%= link_to "send incident", new_project_incident_path(@project), class: "btn btn-sm btn-primary" %>
 				<%= link_to "view its incidents", project_incidents_path(@project), class: "btn btn-sm btn-success" %>
