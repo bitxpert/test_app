@@ -18,7 +18,8 @@ class UsersController < ApplicationController
 		@user = User.new(params[:user])
 		if @user.save
 			if current_user.admin?
-				@user.role = "client"  
+				@user.role = "client"
+				@user.client_id = @user.id  
 			else
 				@user.role = "user"
 				@user.client_id = current_user.id
