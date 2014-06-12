@@ -12,7 +12,15 @@ class User < ActiveRecord::Base
   has_many :created_projects, class_name: "Project", foreign_key: "creator_id"
   has_many :subordinates, class_name: "User", foreign_key: "client_id"
   belongs_to :client, class_name: "User"
+  after_create assign_client_id
 
+  def assign_client_id
+    if self.role == "client"
+        cid = self.id
+        self.client_id = cid
+        self.save!
+      end
+  end
   def whole_projects
   	self.client.projects || self.projects
   end
