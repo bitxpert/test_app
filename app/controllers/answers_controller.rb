@@ -11,8 +11,9 @@ class AnswersController < ApplicationController
 	end
 	private
 	def set_project_and_answer
-		@project = current_user.whole_projects.find(params[:project_id])
-		@answer = @project.answers.find(params[:id])
+		@report = Report.find(params[:report])
+		# @project = current_user.whole_projects.find(params[:project_id])
+		@answer = @report.answers.find(params[:id])
 
 	end
 

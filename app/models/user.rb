@@ -12,9 +12,9 @@ class User < ActiveRecord::Base
   has_many :created_projects, class_name: "Project", foreign_key: "creator_id"
   has_many :subordinates, class_name: "User", foreign_key: "client_id"
   belongs_to :client, class_name: "User"
-
+ 
   def whole_projects
-  	self.client.projects
+  	self.client.projects rescue self.projects
   end
   def admin?
     self.role == "admin"

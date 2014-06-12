@@ -1,0 +1,67 @@
+<script type="text/javascript">
+	$(document).ready(function(){
+
+		$('.answer_status').click(function(){
+			var $this = $(this);
+			$.ajax({
+	          type: 'patch',
+	          url: '/projects/'+ $('#project_id').val() +'/answers/' + $this.attr('data-id'),
+	          dataType: 'json',
+	          data: {
+	          	status: $this.val(),
+	          	report: $('#report_id').val()
+	          }
+	        }); // end of ajax
+		});
+
+	});
+</script>
+<%= hidden_field_tag :report_id, @report.id %>
+<%= hidden_field_tag :project_id, @report.project.id %>
+<%= link_to "<< Back",project_reports_path(@project,@report) %>
+<br/>
+<table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <th>Name</th>
+      <th>Action</th>
+    </thead>  
+    <tbody>
+        <tr>
+          <td><%= @report.name %></td>
+          <td>
+            <%#= link_to "show", project_path(project), class: "btn btn-default btn-sm" %>
+            <%= link_to "View Report", "#", class: "btn btn-xs btn-primary" %>
+            <%= link_to 'Destroy', "#", data: { confirm: 'Are you sure?' }, method: :delete, class: "btn btn-xs btn-danger" %>
+            </td>
+        </tr>
+    </tbody>  
+</table> 
+
+<%= form_for @report,:url=> edit_project_report_path(@project,@report), html: { class: 'well', role: 'form'} do |f| %>
+
+	<fieldset>
+	  <h2 class="text-center"><strong><u>Detailed View of <%= @report.name %></u></strong> </h2>
+	  <br/>
+		<%= f.hidden_field :enable_answers_validation, value: true %>
+		
+
+	  	<% @categories.each do |c| %>
+			<h3><strong><u><%= c.name %></u></strong></h3>
+			<% c.questions.each do |q| %>
+				<div class="form-group">		
+					<%= f.label q.body, class: "control-label" %>
+		            <% answer = @answers.find_by(question_id: q.id) %>
+			     	<div class="row">
+				     	<% GlobalConstants::Answers::STATUSES.each do |st| %> 
+					      	<div class="col-sm-3">
+					      		<%= radio_button_tag "status#{answer.id}", st[1], answer_radio_status(answer.status, st[1]), class: "answer_status", data: { id: answer.id } %>
+					      		<%= label "status#{answer.id}_#{st[1]}", st[0] %>	
+					      	</div> 
+				        <% end %>
+			        </div>
+			        <br/>
+		    	</div>
+			<% end %>
+		<% end %>
+	</fieldset>
+<% end %>

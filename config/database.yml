@@ -4,7 +4,7 @@ development:
   database: test_app_development
   pool: 5
   username: root
-  password: 
+  password: 'devsinc'
 
 test:
   adapter: mysql2
@@ -12,4 +12,13 @@ test:
   database: test_app_test
   pool: 5
   username: root
-  password: 
+  password: 'devsinc'
+
+production:
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  database: test_app_pr
+  pool: 5
+  username: root
+  password: "helloworld91@"
