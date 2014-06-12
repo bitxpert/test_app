@@ -26,7 +26,7 @@ class ProjectsController < ApplicationController
 
 	def show
 		@categories = Category.all.includes(:questions)
-		@answers = @project.answers
+		@answers = @project.reports.first.answers
 		respond_with :obj => {project: @project, categories: @categories, answers: @answers}
 	end	
 
@@ -53,6 +53,12 @@ class ProjectsController < ApplicationController
     		end
  		end
 	end
+
+
+	# def reports
+	# 	@project = Project.find(params[:id])
+	# 	@reports = @project.reports
+	# end
 
 	private
 

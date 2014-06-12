@@ -10,12 +10,18 @@ TestApp::Application.routes.draw do
     root 'home#index'
     resources :invitations
     resources :users
+    
 
     resources :projects do
       member do 
         get 'detail_report'
       end
       resources :answers, only: [:update]
+      resources :reports do 
+        member do
+          get 'detail_report'
+        end
+      end
       resources :incidents, only: [:new, :create, :index, :show]
     end
 

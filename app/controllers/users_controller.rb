@@ -13,17 +13,17 @@ class UsersController < ApplicationController
 		end
 	end
 	def create
-		     params.permit!
-
+		    params.permit!
+		    puts "---"*90
 		@user = User.new(params[:user])
 		if @user.save
 			if current_user.admin?
-			@user.role = "client"  
-		else
-			@user.role = "user"
-			@user.client_id = current_user.id
-		end
-		@user.save!
+				@user.role = "client"  
+			else
+				@user.role = "user"
+				@user.client_id = current_user.id
+			end
+			@user.save!
 			flash[:notice] = "User has been added successfully."
 			return redirect_to users_path
 		else
