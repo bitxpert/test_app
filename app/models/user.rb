@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
   belongs_to :client, class_name: "User"
  
   def whole_projects
-  	self.client.projects || self.projects
+  	self.client.projects rescue self.projects
   end
   def admin?
     self.role == "admin"
