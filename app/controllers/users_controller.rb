@@ -25,7 +25,8 @@ class UsersController < ApplicationController
 			end
 			@user.save!
 			if @user.role == "client"
-				@user.update(client_id: @user.id)
+				@user.client_id = @user.id
+				@user.save!
 			end
 			flash[:notice] = "User has been added successfully."
 			return redirect_to users_path
