@@ -17,7 +17,13 @@
     <tbody>
       <% @reports.each do |report|%>
         <tr>
-          <td><%= report.name %></td>
+          <td>
+            <% if report.answers.where(status: 2).present? %>
+              <span style="color: red;"><%= "#{report.name}" %></span>
+            <% else %>
+              <%= "#{report.name}" %>
+            <% end %>
+          </td>
           <td>
             <%= link_to "Download Report",detail_report_project_report_path(@project,report ,{ format: :pdf}), class: "btn btn-success btn-xs" %>
             <%= link_to "View Report", project_report_path(@project,report), class: "btn btn-xs btn-primary" %>

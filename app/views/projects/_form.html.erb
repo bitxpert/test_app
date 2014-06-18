@@ -1,3 +1,8 @@
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#project_userid').multiselect();
+  });
+</script>
 <%= hidden_field_tag 'active_class', 'create_project'%>
 <div class="row">
   <div class="col-lg-6 col-lg-offset-3">
@@ -18,7 +23,7 @@
         <div class="form-group">
           <%= f.label :name, class: "col-sm-3 control-label" %>
           <div class="col-sm-9">
-            <%= f.text_field :name, class: "form-control", :placeholder=>"Project Name" %>
+            <%= f.text_field :name, autofocus: true,class: "form-control", :placeholder=>"Project Name" %>
           </div>
         </div>
 
@@ -35,7 +40,14 @@
             <%= f.text_field :contact_info, class: "form-control" %>
           </div>
         </div>
-
+        <% if current_user.role == "client" %>
+          <div class="form-group">
+            <%= f.label :cars, "Add user", class: "col-sm-3 control-label" %>
+            <div class="col-sm-9">
+              <%= f.select(:userid, options_for_select(current_user.subordinates.collect {|x| [x.email, x.id]}), {}, {multiple: "multiple"}) %>
+            </div>
+          </div>
+        <% end %>
       </fieldset>
 
       <div class="col-sm-offset-3">
