@@ -12,7 +12,7 @@ test:
   database: test_app_test
   pool: 5
   username: root
-  password: 'devsinc'
+  password: 'helloworld81@'
 
 production:
   adapter: mysql2
