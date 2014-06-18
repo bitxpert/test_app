@@ -10,6 +10,10 @@ class AnswersController < ApplicationController
 		end
 	end
 
+
+
+
+
 	def update_answer
 		answer = Answer.find(params[:id])
 		# puts "---0"*90

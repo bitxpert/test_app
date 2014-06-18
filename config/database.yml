@@ -1,15 +1,15 @@
-encoding: utf-8
+# encoding: utf-8
 development:
   adapter: mysql2
-  # encoding: utf8
+  encoding: utf8
   database: test_app_development
   pool: 5
   username: root
-  password: 'devsinc'
+  password: 'helloworld81@'
 
 test:
   adapter: mysql2
-  # encoding: utf8
+  encoding: utf8
   database: test_app_test
   pool: 5
   username: root
