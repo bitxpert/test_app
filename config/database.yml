@@ -5,7 +5,7 @@ development:
   database: test_app_development
   pool: 5
   username: root
-  password: 'devsinc'
+  password: 'helloworld81@'
 
 test:
   adapter: mysql2
