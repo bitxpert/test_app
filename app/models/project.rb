@@ -18,7 +18,7 @@ class Project < ActiveRecord::Base
   		report.name = "#{self.name} Report #{Date.today.to_s}"
   		report.save!
 	    Question.all.each do |q|
-	      report.answers.create!(question_id: q.id)
+	      report.answers << Answer.create!(question_id: q.id)
 	    end
   	end
 end

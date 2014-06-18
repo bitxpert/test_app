@@ -20,12 +20,8 @@ class ProjectsController < ApplicationController
 		@project = user_client.projects.build(params_project)
 		
 		# @project.user_id = current_user.id
-
 		# @project = user_client.build_projects(params_project)
 		if @project.save
-			# report = @project.reports.first 
-			# report.name = "#{@project.name} Report #{Date.today.to_s}"
-			# report.save!
 			if current_user.role == "client"
 				users = params[:project][:userid] if params[:project][:userid].present?
 				users && users.each do |user|
