@@ -23,10 +23,10 @@ gem 'turbolinks'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
-
+# gem 'bootstrap-multiselect-rails'
 # Authentication 
 gem 'devise'
-
+gem 'carrierwave'
 
 # Database
 gem 'mysql2'

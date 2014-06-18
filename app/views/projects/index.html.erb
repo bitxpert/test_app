@@ -28,6 +28,9 @@
             <%= link_to "Send Incident Report", project_incidents_path(project), class: "btn btn-sm btn-primary" %>
             <%= link_to "Create Incident Report", new_project_incident_path(project), class: "btn btn-sm btn-success" %>
             <%= link_to "View Past Reports", project_reports_path(project), class: "btn btn-sm btn-warning" %>
+            <% if current_user.role == "client" %>
+              <%= link_to "Assign to user", assign_project_project_path(project), class: "btn btn-sm btn-primary" %>
+            <% end %>  
             <%= link_to 'Destroy', project, data: { confirm: 'Are you sure?' }, method: :delete, class: "btn btn-sm btn-danger" %>
             </td>
         </tr>

@@ -4,15 +4,42 @@
 		$('.answer_status').click(function(){
 			var $this = $(this);
 			$.ajax({
-          type: 'patch',
-          url: '/projects/'+ $('#project_id').val() +'/answers/' + $this.attr('data-id'),
-          dataType: 'json',
-          data: {
-          	status: $this.val()
-          }
-        }); // end of ajax
+	          type: 'patch',
+	          url: '/projects/'+ $('#project_id').val() +'/answers/' + $this.attr('data-id'),
+	          dataType: 'json',
+	          data: {
+	          	status: $this.val()
+	          }
+        	}); // end of ajax
 		});
 
+		$(".update-answer").click(function(e){
+			// alert("sdssd");
+			e.preventDefault();
+			var ansid = $(this).attr('id');
+			// alert(ansid);
+			// var pid =  $("#answer_project").val();
+			// var ans = $("#answer_answer-"+ansid).val();
+			var token =  $('meta[name="csrf-token"]').attr('content');
+			var form = $(this).parents('form');
+			console.log(form);
+			var url = form.attr('action');
+			form.ajaxSubmit({
+				url: url,
+				dataType: 'json',
+				type: 'patch',
+				data: {
+		            'authenticity_token' : $('meta[name="csrf-token"]').attr('content')
+		        },
+		        success: function (data) {
+		        	// alert("sasasasasass");
+		        	$(".save-span-"+ansid).removeClass("hidden");
+ 	             	$("#notes-"+ansid).val('');
+ 	             	// $("#answer_file").val('');
+                }
+			});
+			      		
+		});
 	});
 </script>
 <%= hidden_field_tag :project_id, @project.id %>
@@ -42,31 +69,48 @@
 	</tbody>	
 </table>	
 
-<%= form_for @project, html: { class: 'well', role: 'form'} do |f| %>
+<%#= form_for @project, html: { class: 'well', role: 'form'} do |f| %>
 
 	<fieldset>
 	  <h2 class="text-center"><strong><u>Detailed View of <%= @project.name %></u></strong> </h2>
 	  <br/>
-		<%= f.hidden_field :enable_answers_validation, value: true %>
+		<%#= f.hidden_field :enable_answers_validation, value: true %>
 	  	<% @categories.each do |c| %>
 			<h3><strong><u><%= c.name %></u></strong></h3>
 			<% c.questions.each do |q| %>
 				<div class="form-group">		
-					<%= f.label q.body, class: "control-label" %>
-		      <% answer = @answers.find_by(question_id: q.id) %>
+					<%= "#{q.body}" %>
+		      		<% answer = @answers.find_by(question_id: q.id) %>
 				     	<div class="row">
-				     	<% GlobalConstants::Answers::STATUSES.each do |st| %> 
-				      	<div class="col-sm-3">
-				      		<%= radio_button_tag "status#{answer.id}", st[1], answer_radio_status(answer.status, st[1]), class: "answer_status", data: { id: answer.id } %>
-				      		<%= label "status#{answer.id}_#{st[1]}", st[0] %>	
-				      	</div> 
-				      	
-				      <% end %>
-				      </div>
-				      <br/>
+					     	<% GlobalConstants::Answers::STATUSES.each do |st| %> 
+						      	<div class="col-sm-3">
+						      		<%= radio_button_tag "status#{answer.id}", st[1], answer_radio_status(answer.status, st[1]), class: "answer_status", data: { id: answer.id } %>
+						      		<%= label "status#{answer.id}_#{st[1]}", st[0] %>	
+						      	</div> 
+					      	<% end %>
+				        </div>
+				    <br/>
 		    	</div>
-
+		    	<div class="" style="margin-right: 0px;margin-left: 14px;">
+		       	<%= render partial: "notes", :locals => {:@answer1 => answer, :@project=>@project} %>
+		       </div>
 			<% end %>
 		<% end %>
 	</fieldset>
-<% end %>
+<%# end %>
+// e.preventDefault();
+			// var aid =  $("#answer_answer").val();
+			// var pid =  $("#answer_project").val();
+			// var text = $("#answer_notes").val();
+			// $.ajax({
+			  //             type: 'get',
+			  //             url: '/projects/'+pid+'/update_answer',
+			  //             dataType: 'json',
+			  //             data: {
+			  //               'id' : aid,
+			  //               'text' : text
+			  //             },
+			  //             success: function (data) {
+			  //             	$("#answer_notes").val('');
+			  //             }	
+			  //   	});   
