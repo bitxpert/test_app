@@ -6,7 +6,6 @@ development:
   pool: 5
   username: root
   password: 'helloworld81@'
-
 test:
   adapter: mysql2
   encoding: utf8
