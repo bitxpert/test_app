@@ -14,7 +14,8 @@ class Project < ActiveRecord::Base
   	
   	def create_answers
   		report = self.reports.build
-  		report.name = Date.today.to_s
+  		# report.name = Date.today.to_s
+  		report.name = "#{self.name} Report #{Date.today.to_s}"
   		report.save!
 	    Question.all.each do |q|
 	      report.answers.create!(question_id: q.id)
