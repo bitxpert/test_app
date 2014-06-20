@@ -2,7 +2,7 @@ class UsersController < ApplicationController
 	before_action :authenticate_user!
 	before_filter :admin_or_client_only, only: [:new, :create, :destroy, :index]
 	before_filter :find_user, only: [:edit, :destroy]
-	
+	respond_to :html,:json
 	def new
 		@user = User.new
 		if current_user.admin?
@@ -11,11 +11,10 @@ class UsersController < ApplicationController
 			@role = "user"
 			@client_id = current_user
 		end
+		respond_with @user
 	end
 	def create
-		    params.permit!
-		    puts "---"*90
-		@user = User.new(params[:user])
+		@user = User.new(user_params)
 		if @user.save
 			if current_user.admin?
 				@user.role = "client"
@@ -39,6 +38,7 @@ class UsersController < ApplicationController
 		else
 			@users = current_user.subordinates
 		end
+		respond_with @users
 	end	
 
 	def destroy

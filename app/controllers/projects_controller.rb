@@ -2,7 +2,7 @@ class ProjectsController < ApplicationController
 	before_action :authenticate_user!
 	before_action :check_user
 	before_action :set_project, only: [:show, :edit, :update, :destroy, :detail_report]
-	respond_to :html, :json, only: [:index, :new, :create, :edit, :update, :show, :destroy]
+	respond_to :html, :json, only: [:index, :new, :create, :edit, :update, :show, :destroy,:assign_project,:add_users]
 	
 	def index
 		@projects = current_user.whole_projects
@@ -76,7 +76,7 @@ class ProjectsController < ApplicationController
 	def detail_report
   		respond_to do |format|
     		format.html
-    		format.json
+    		format.json {render :json=> true}
     		format.pdf do
       		pdf = ProjectDetailPdf.new(@project, view_context)
       		send_data pdf.render, filename: "(#{@project.name}) project report.pdf", type: "application/pdf", disposition: "attachment"
@@ -86,6 +86,7 @@ class ProjectsController < ApplicationController
 
 	def assign_project
 		@project = Project.find(params[:id])
+		respond_with @project
 	end
 
 
@@ -102,8 +103,13 @@ class ProjectsController < ApplicationController
 				project_user.save!		
 			end	
 		end
-		flash[:success] = "Users add successfully"
-		redirect_to projects_path		
+		# respond_with project_user
+		respond_to do |format|
+	        format.html { redirect_to projects_path, notice: 'Users add successfully.' }
+	        format.json { render :json=> true }
+	    end
+		# flash[:success] = "Users add successfully"
+		# redirect_to projects_path		
 	end
 
 	private

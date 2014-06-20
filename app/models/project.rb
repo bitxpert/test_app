@@ -20,7 +20,7 @@ class Project < ActiveRecord::Base
 	    Question.all.each do |q|
 	      # report.answers.create!(question_id: q.id)
 	      # report.answers << Answer.create!(question_id: q.id)
-	      Answer.create!(question_id: q.id, report_id: report.id)	
+	      Answer.create!(question_id: q.id, report_id: report.id, file: nil)	
 	    end
   	end
 end

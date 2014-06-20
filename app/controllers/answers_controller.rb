@@ -4,14 +4,11 @@ class AnswersController < ApplicationController
 	respond_to :html, :json
 	def update
 		if @answer.update(status: params[:status])
-			respond_with @answer
+			respond_with true
 		else
 			respond_with false
 		end
 	end
-
-
-
 
 
 	def update_answer

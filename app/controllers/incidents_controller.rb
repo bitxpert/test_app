@@ -8,13 +8,12 @@ class IncidentsController < ApplicationController
   def index
     @incidents = @project.incidents
     respond_with @incidents
-
   end
 
   # GET /incidents/1
   # GET /incidents/1.json
   def show
-    respond_with @incident
+    # respond_with @incident
   end
 
   # GET /incidents/new
