@@ -1,5 +1,4 @@
 TestApp::Application.routes.draw do
-match '*path', :controller => 'application', :action => 'handle_options_request', :constraints => {:method => 'OPTIONS'}
 
   post "/users" => "users#create"
   get "/users/sign_out" => "sessions#destroy"
