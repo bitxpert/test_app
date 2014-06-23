@@ -4,6 +4,8 @@ TestApp::Application.routes.draw do
   get "/users/sign_out" => "sessions#destroy"
 
   devise_for :users, :controllers => {:registrations => 'registrations', sessions: "sessions" }
+
+  options "users/sign_in", to: "sessions#create"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
