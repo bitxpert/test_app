@@ -5,24 +5,34 @@ class SessionsController < Devise::SessionsController
  
   respond_to :json, :html
   def create
-    if request.method == "OPTIONS"
-      headers['Access-Control-Allow-Origin'] = request.env['HTTP_ORIGIN']
-      headers['Access-Control-Allow-Methods'] = 'POST, GET, OPTIONS'
-      headers['Access-Control-Max-Age'] = '1000'
-      headers['Access-Control-Allow-Headers'] = '*,x-requested-with'
-      
-      return (head :ok)
+    # return render :text => "sadf"
+    if request.method == "options" || request.method=="OPTIONS"
+      # render :ok
+      render :nothing => true, :status => 200
+      return 
     end
+    email = ""
+    password = ""
+    if request.format == "json"
+      email = params[:data][:user][:email] 
+      password = params[:data][:user][:password] 
+    else
+      email = params[:user][:email]
+      password = params[:user][:password]
+    end
+
+    resource = User.find_for_database_authentication(email: email) 
     
-    resource = User.find_for_database_authentication(:email=>params[:user][:email])
     return invalid_login_attempt unless resource
  
-    if resource.valid_password?(params[:user][:password])
+    if resource.valid_password?(password)
       sign_in("user", resource)
-		respond_to do |format|
+		  respond_to do |format|
 	        format.html { redirect_to root_path}
 	        format.json { render :json=> resource }
 	    end
+
+      puts "SUCCESS"*30
       return
     end
     invalid_login_attempt

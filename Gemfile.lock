@@ -74,6 +74,7 @@ GEM
       pdf-core (~> 0.2.2)
       ttfunk (~> 1.1.1)
     rack (1.5.2)
+    rack-cors (0.2.9)
     rack-test (0.6.2)
       rack (>= 1.0)
     rails (4.0.0)
@@ -144,6 +145,7 @@ DEPENDENCIES
   mailit
   mysql2
   prawn
+  rack-cors
   rails (= 4.0.0)
   sass-rails (~> 4.0.2)
   sdoc
