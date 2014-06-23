@@ -21,7 +21,7 @@ class ReportsController < ApplicationController
 		@project = @report.project
 		@categories = Category.all.includes(:questions)
 		@answers = @report.answers
-		respond_with :obj => {project: @project, categories: @categories, answers: @answers}
+		# respond_with :obj => {project: @project, categories: @categories, answers: @answers}
 	end
 
 	def detail_report
