@@ -5,7 +5,9 @@ TestApp::Application.routes.draw do
 
   devise_for :users, :controllers => {:registrations => 'registrations', sessions: "sessions" }
 
-  options "users/sign_in", to: "sessions#create"
+  # "users/sign_in", to: "sessions#create"
+  # match 'users/sign_in', :controller => 'sessions', :action => 'create', :constraints => {:method => 'OPTIONS'}
+  match "/users/sign_in" => "sessions#create", via: :options
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

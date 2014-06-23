@@ -5,6 +5,15 @@ class SessionsController < Devise::SessionsController
  
   respond_to :json, :html
   def create
+    if request.method == "OPTIONS"
+      headers['Access-Control-Allow-Origin'] = request.env['HTTP_ORIGIN']
+      headers['Access-Control-Allow-Methods'] = 'POST, GET, OPTIONS'
+      headers['Access-Control-Max-Age'] = '1000'
+      headers['Access-Control-Allow-Headers'] = '*,x-requested-with'
+      
+      return (head :ok)
+    end
+    
     resource = User.find_for_database_authentication(:email=>params[:user][:email])
     return invalid_login_attempt unless resource
  
