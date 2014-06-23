@@ -1,8 +1,10 @@
 TestApp::Application.routes.draw do
+match '*path', :controller => 'application', :action => 'handle_options_request', :constraints => {:method => 'OPTIONS'}
 
   post "/users" => "users#create"
+  get "/users/sign_out" => "sessions#destroy"
 
-  devise_for :users, :controllers => {:registrations => 'registrations'}
+  devise_for :users, :controllers => {:registrations => 'registrations', sessions: "sessions" }
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

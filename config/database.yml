@@ -5,14 +5,14 @@ development:
   database: test_app_development
   pool: 5
   username: root
-  password: 'devsinc'
+  password: 'helloworld91@'
 test:
   adapter: mysql2
   encoding: utf8
   database: test_app_test
   pool: 5
   username: root
-  password: 'devsinc'
+  password: 'helloworld91@'
 
 production:
   adapter: mysql2
