@@ -52,8 +52,7 @@ class SessionsController < Devise::SessionsController
   # end
   
   def destroy
-
-    sign_out(resource)
+    sign_out(resource_name)
 resource.try(:tokens).try(:destroy_all)
     
     respond_to do |format|
