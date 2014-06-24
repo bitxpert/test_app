@@ -24,7 +24,7 @@ class SessionsController < Devise::SessionsController
     return invalid_login_attempt unless resource
  
     if resource.valid_password?(password)
-      sign_in("user", resource)
+      sign_in(resource)
 		  respond_to do |format|
 	        format.html { redirect_to root_path}
 	        format.json { render :json=> resource }
