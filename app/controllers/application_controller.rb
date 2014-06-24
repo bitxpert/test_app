@@ -6,8 +6,6 @@ class ApplicationController < ActionController::Base
   def authenticate_user!
     if params[:authenticity_token].present?
       token = Token.find_by_api(params[:authenticity_token])
-      puts "=="*90
-      puts token.user
       if token.present? and token.user.present?
         sign_in(token.user)
         return
