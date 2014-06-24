@@ -25,9 +25,11 @@ class SessionsController < Devise::SessionsController
  
     if resource.valid_password?(password)
       sign_in(resource)
-		  respond_to do |format|
+      random = SecureRandom.hex
+      resource.tokens << Token.create!(api: random)
+      respond_to do |format|
 	        format.html { redirect_to root_path}
-	        format.json { render :json=> resource }
+	        format.json { render :json=> {user: resource, authenticity_token: random }}
 	    end
       puts "SUCCESS"*30
       return
@@ -50,7 +52,10 @@ class SessionsController < Devise::SessionsController
   # end
   
   def destroy
-    sign_out(resource_name)
+
+    sign_out(resource)
+resource.try(:tokens).try(:destroy_all)
+    
     respond_to do |format|
 	        format.html { redirect_to root_path}
 	        format.json { render :json=> resource }

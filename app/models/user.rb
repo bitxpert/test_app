@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
 
 
 
+  has_many :tokens
   has_many :invitations 
   # has_many :projects
   has_and_belongs_to_many :projects

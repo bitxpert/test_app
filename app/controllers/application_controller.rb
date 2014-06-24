@@ -3,6 +3,18 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   # protect_from_forgery with: :exception
   after_action :set_access_control_headers
+  def authenticate_user!
+    if params[:authenticity_token].present?
+      token = Token.find_by_api(params[:authenticity_token])
+      puts "=="*90
+      puts token.user
+      if token.present? and token.user.present?
+        sign_in(token.user)
+        return
+      end
+    end
+    super
+  end
 # def handle_options_request
 #     head(:ok) if request.request_method == "OPTIONS"
 # end
