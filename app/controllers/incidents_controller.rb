@@ -19,6 +19,7 @@ class IncidentsController < ApplicationController
   # GET /incidents/new
   def new
     @incident = Incident.new
+    @incident.your_name = current_user.first_name ||  current_user.last_name || ''
     respond_with @incident
   end
 
@@ -43,6 +44,14 @@ class IncidentsController < ApplicationController
         format.json { render json: @incident.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def send_email
+    incident = Incident.find(params[:id])
+    id = params[:id]
+    aa = UserMailer.send_incident_report(current_user,incident).deliver
+    flash[:success] = "Email sent successfully."
+    redirect_to :back
   end
 
   # PATCH/PUT /incidents/1
@@ -77,6 +86,8 @@ class IncidentsController < ApplicationController
       format.pdf do
         # if @incident.downloaded.blank?
           pdf = IncidentPdf.new(@incident)
+          file = "#{Rails.root}/public#{@incident.file_url}"
+          pdf.image file, :fit => [450,350] 
           @incident.update!(downloaded: true)
           send_data pdf.render, filename: "(Your new Incident on project #{@incident.project.name}).pdf", type: "application/pdf", disposition: "attachment"
         # else
@@ -97,6 +108,6 @@ class IncidentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def incident_params
-      params.require(:incident).permit(:report_type, :your_name, :job_title, :injury_date, :injury_time, :witnesses, :location, :circumstances, :event_discription, :injuries_type, :ppe_used, :medical_assistance_provided, :project_id)
+      params.require(:incident).permit(:report_type, :your_name, :job_title, :injury_date, :injury_time, :witnesses, :location, :circumstances, :event_discription, :injuries_type, :ppe_used, :medical_assistance_provided, :project_id,:file)
     end
 end

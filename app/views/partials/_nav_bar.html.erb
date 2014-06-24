@@ -22,8 +22,8 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
       <% unless current_user.role == 'user' %>
-        <li class="invitations"><a href="<%= users_path %>">List Users</a></li>
-        <li class="invite_user"><a href="<%= new_user_path %>">Add User</a></li>
+        <li class="invitations"><a href="<%= users_path %>">List Clients</a></li>
+        <li class="invite_user"><a href="<%= new_user_path %>">Add Client</a></li>
         <% end %>
         <% unless current_user.role == 'admin' %>
           <li class="all_projects"><a href="<%= projects_path %>">List Projects</a></li> 

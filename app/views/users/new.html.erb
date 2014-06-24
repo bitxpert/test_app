@@ -4,15 +4,27 @@
     <div class="col-sm-6 col-md-4 col-md-offset-4">
       <div class="account-wall" style="padding: 40px 20px 20px 20px !important">
         <%= form_for(@user) do |f| %>
-          <div><%= f.label :email %>
-            <br/>
-            <%= f.email_field :email, autofocus: true, class: "form-control" %></div>
+          
+
+          <div><%= f.label :email %><br/>
+          <%= f.email_field :email, autofocus: true, class: "form-control" %></div>
 
           <div><%= f.label :first_name %><br />
           <%= f.text_field :first_name,  class: "form-control" %></div>
           
           <div><%= f.label :last_name %><br />
           <%= f.text_field :last_name,  class: "form-control" %></div>
+
+          
+          <div><%= f.label :company %><br />
+          <%= f.text_field :company,  class: "form-control" %></div>
+
+          <div><%= f.label :phone %><br />
+          <%= f.text_field :phone,  class: "form-control" %></div>
+
+          <div><%= f.label :address %><br />
+          <%= f.text_field :address,  class: "form-control" %></div>
+
 
           <div><%= f.label :password %><br />
             <%= f.password_field :password, autocomplete: "off", class: "form-control" %></div>

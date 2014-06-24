@@ -2,7 +2,7 @@ class ProjectsController < ApplicationController
 	before_action :authenticate_user!
 	before_action :check_user
 	before_action :set_project, only: [:show, :edit, :update, :destroy, :detail_report]
-	respond_to :html, :json, only: [:index, :new, :create, :edit, :update, :show, :destroy,:assign_project,:add_users]
+	respond_to :html, :json, only: [:index, :new, :create, :edit, :update, :show, :destroy,:assign_project,:add_users,:reports]
 	
 	def index
 		@projects = current_user.whole_projects
@@ -34,7 +34,7 @@ class ProjectsController < ApplicationController
 				end
 			end
 			# if current_user.role == "user"
-				project_user = ProjectsUsers.new
+				project_user = ProjectsUsers.find_by_user_id(current_user.id) || ProjectsUsers.new
 				project_user.user_id = current_user.id
 				project_user.project_id = @project.id
 				project_user.save!
@@ -46,8 +46,7 @@ class ProjectsController < ApplicationController
 
 	def update_answer
 		answer = Answer.find(params[:id])
-		puts "---0"*90
-		puts answer.inspect
+		
 		answer.notes = params[:answer][:notes]
 		answer.file = params[:answer][:file]
 		answer.save!
@@ -59,6 +58,17 @@ class ProjectsController < ApplicationController
 		@answers = @project.reports.first.answers
 		respond_with :obj => {project: @project, categories: @categories, answers: @answers}
 	end	
+
+	def report
+		@project = Project.find(params[:id])
+		user = User.find(ProjectsUsers.find_by_project_id(@project.id).user_id)
+		@uname = user.first_name || user.last_name
+		@days_30 = @project.reports.where("created_at >= ?", Date.today-30.days).count
+		@days_60 = @project.reports.where("created_at >= ?", Date.today-60.days).count
+		@days_90 = @project.reports.where("created_at >= ?", Date.today-90.days).count
+		
+	end
+
 
 	def edit
 		respond_with @project

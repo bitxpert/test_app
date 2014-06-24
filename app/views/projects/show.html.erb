@@ -4,13 +4,43 @@
 		$('.answer_status').click(function(){
 			var $this = $(this);
 			$.ajax({
-	          type: 'patch',
-	          url: '/projects/'+ $('#project_id').val() +'/answers/' + $this.attr('data-id'),
+	          type: 'get',
+	          url: '/projects/'+ $('#project_id').val() +'/answers/' + $this.attr('data-id') + '/check_answer',
 	          dataType: 'json',
 	          data: {
-	          	status: $this.val()
+	          	id: $this.attr('data-id')
+	          },
+	          success :function(data){
+	          	if(data == true)
+	          	{
+	          		bootbox.prompt("Please Enter Reason?", function(result) {                
+					  if (result === null) {                                             
+					    // Example.show("Prompt dismissed");                              
+					  } else {
+						$.ajax({
+				          type: 'patch',
+				          url: '/projects/'+ $('#project_id').val() +'/answers/' + $this.attr('data-id'),
+				          dataType: 'json',
+				          data: {
+				          	status: $this.val(),
+				          	note: result
+				          }
+			        	});  	
+					  }
+					});
+	          	}else{
+					$.ajax({
+			          type: 'patch',
+			          url: '/projects/'+ $('#project_id').val() +'/answers/' + $this.attr('data-id'),
+			          dataType: 'json',
+			          data: {
+			          	status: $this.val(),
+			          	id: $this.attr('data-id')
+			          }
+		        	});
+	          	}
 	          }
-        	}); // end of ajax
+	        });
 		});
         ///////submit button click
 		$(".update-answer").click(function(e){
@@ -57,12 +87,12 @@
 			<td><%= @project.address %></td>
 			<td>
             	<%= link_to "Edit", edit_project_path(@project), class: "btn btn-default btn-sm" %>
-            	            <%= link_to "View Past Reports", project_reports_path(@project), class: "btn btn-sm btn-warning" %>
+            	            <%= link_to "View reports", project_reports_path(@project), class: "btn btn-sm btn-warning" %>
 
-				<%= link_to "download detail report", detail_report_project_path(@project, { format: :pdf}), class: "btn btn-sm btn-info" %>
-				<%= link_to "send incident", new_project_incident_path(@project), class: "btn btn-sm btn-primary" %>
-				<%= link_to "view its incidents", project_incidents_path(@project), class: "btn btn-sm btn-success" %>
-            	<%= link_to 'Destroy', @project, data: { confirm: 'Are you sure?' }, method: :delete, class: "btn btn-sm btn-danger" %>
+				<%= link_to "Download detail report", detail_report_project_path(@project, { format: :pdf}), class: "btn btn-sm btn-info" %>
+				<%= link_to "Send incident", new_project_incident_path(@project), class: "btn btn-sm btn-primary" %>
+				<%= link_to "View incidents", project_incidents_path(@project), class: "btn btn-sm btn-success" %>
+            	<%= link_to 'Delete', @project, data: { confirm: 'Are you sure?' }, method: :delete, class: "btn btn-sm btn-danger" %>
 				</td>
 
 		</tr>	
@@ -98,19 +128,3 @@
 		<% end %>
 	</fieldset>
 <%# end %>
-// e.preventDefault();
-			// var aid =  $("#answer_answer").val();
-			// var pid =  $("#answer_project").val();
-			// var text = $("#answer_notes").val();
-			// $.ajax({
-			  //             type: 'get',
-			  //             url: '/projects/'+pid+'/update_answer',
-			  //             dataType: 'json',
-			  //             data: {
-			  //               'id' : aid,
-			  //               'text' : text
-			  //             },
-			  //             success: function (data) {
-			  //             	$("#answer_notes").val('');
-			  //             }	
-			  //   	});   

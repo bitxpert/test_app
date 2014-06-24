@@ -24,11 +24,13 @@ class IncidentPdf < Prawn::Document
         [ "location:",        @incident.location || "N/A" ],
         [ "PPE used:",        convert_boolean_to_str(@incident.ppe_used) || "N/A"  ],
         [ "Medical Assistance Provided:", convert_boolean_to_str(@incident.medical_assistance_provided) || "N/A"  ], 
-        ["Registor incident:", @incident.created_at.strftime("%a  %d - %m - %Y   %I:%M %p") ]
+        ["Registor incident:", @incident.created_at.strftime("%a  %d - %m - %Y   %I:%M %p") ],
+         
       ]
     table(data, cell_style: {border_width: 0}) do
       columns(0).font_style = :bold
     end
+     
   end
   
   def convert_boolean_to_str(val)

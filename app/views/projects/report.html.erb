@@ -1,0 +1,25 @@
+<%#= hidden_field_tag 'active_class', 'all_projects'%>
+<% if @project.present? %>  
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <th>Project</th>
+      <th>User</th>
+      <th>30 days Checklists</th>
+      <th>60 days Checklists</th>
+      <th>90 days Checklists</th>
+    </thead>  
+    <tbody>
+      <%# @projects.each do |project|%>
+        <tr>
+          <td><%= @project.name %></td>
+          <td><%= @uname %></td>
+          <td><%= @days_30%></td>
+          <td><%= @days_60 %></td>
+          <td><%= @days_90 %></td>
+        </tr>
+      <%# end %>   
+    </tbody>  
+  </table> 
+<% else %>
+  <b>No Project Present</b>
+<% end %>   

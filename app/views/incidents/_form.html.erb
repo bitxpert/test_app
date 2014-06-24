@@ -93,6 +93,9 @@
         <div class="form-group">
           <%= f.label :medical_assistance_provided, "#{f.check_box :medical_assistance_provided} Medical Assistance Provided".html_safe, class: "col-sm-offset-3 control-label" %>
         </div>
+        <div class="form-group">
+        <%= f.file_field :file, :class=>"file" ,class: "col-sm-offset-3 control-label"%>
+        </div>
       </fieldset>
 
       <div class="col-sm-offset-3">

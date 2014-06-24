@@ -1,0 +1,13 @@
+Dear, <%= @email %><br/>
+===============================================
+<br/><br/>
+Your have recieved project's incident report. Click on the following link to download the report.<br/>
+<br/>
+<br/>
+To download report: <%= link_to "click here",  "http://localhost:3000/incidents/#{@id}/send_new_incident.pdf" %>
+
+<br/><br/>
+Thanks for downloading and have a great day!
+	</body>	
+</html>
+

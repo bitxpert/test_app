@@ -9,4 +9,6 @@ class Incident < ActiveRecord::Base
 	validates_presence_of :location
 	validates_presence_of :injuries_type
 
+	mount_uploader :file, FileUploader
+
 end

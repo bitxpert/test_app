@@ -37,6 +37,7 @@
         <!-- <td><%#= incident.ppe_used %></td> -->
         <!-- <td><%#= incident.medical_assistance_provided %></td> -->
         <td><%= link_to 'Show', project_incident_path(@project, incident), class: "btn btn-xs btn-primary" %>
+        <%= link_to 'send email', send_email_incident_path(incident), class: "btn btn-xs btn-success" %>
         <%= link_to 'Download Report', send_new_incident_incident_path(incident, {format: :pdf}), class: "btn btn-xs btn-primary" %>
         </td>
       </tr>

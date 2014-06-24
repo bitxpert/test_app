@@ -2,7 +2,7 @@ class ReportsController < ApplicationController
 	respond_to :html, :json
 	def index
 		@project = Project.find(params[:project_id])
-		@reports = @project.reports
+		@reports = @project.reports.order("created_at ASC")
 		respond_with :obj => {:@project=> @project,:@reports=>@reports }
 	end
 
