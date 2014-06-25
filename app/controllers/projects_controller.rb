@@ -29,12 +29,32 @@ class ProjectsController < ApplicationController
 						project_user = ProjectsUsers.new
 						project_user.user_id = user.to_i
 						project_user.project_id = @project.id
-						project_user.save!		
+						project_user.save!
+
+						report = @project.reports.build
+				  		report.name = "#{@project.name} Report #{Date.today.to_s}"
+				  		report.user_id = user.to_i
+				  		report.save!
+					    Question.all.each do |q|
+					      Answer.create!(question_id: q.id, report_id: report.id, file: nil)		
+						end
 					end	
 				end
 			end
 			# if current_user.role == "user"
-				project_user = ProjectsUsers.find_by_user_id(current_user.id) || ProjectsUsers.new
+				# report = Report.find_by_user_id(current_user.id)
+				report = Report.where(user_id: current_user.id, project_id: @project.id).first
+				if !report.present?
+					report = @project.reports.build
+			  		report.name = "#{@project.name} Report #{Date.today.to_s}"
+			  		report.user_id = current_user.id
+			  		report.save!
+				    Question.all.each do |q|
+				      Answer.create!(question_id: q.id, report_id: report.id, file: nil)		
+					end
+				end
+				# project_user = ProjectsUsers.find_by_user_id(current_user.id) || ProjectsUsers.new
+				project_user = ProjectsUsers.where(user_id:current_user.id, project_id: @project.id).first || ProjectsUsers.new
 				project_user.user_id = current_user.id
 				project_user.project_id = @project.id
 				project_user.save!
@@ -101,16 +121,26 @@ class ProjectsController < ApplicationController
 
 
 	def add_users
-		puts "--"*90
-		puts params
+		
 		id = params[:projectid]
 		users = params[:project][:userid] if params[:project][:userid].present?
+		project = Project.find(id)
 		users && users.each do |user|
 			if user != ""
 				project_user =  ProjectsUsers.where(user_id: user , project_id: id).first || ProjectsUsers.new
 				project_user.user_id = user.to_i
 				project_user.project_id = id.to_i
-				project_user.save!		
+				project_user.save!	
+				report = Report.find_by_user_id(user.to_i)
+				if !report.present?
+					report = project.reports.build
+			  		report.name = "#{project.name} Report #{Date.today.to_s}"
+			  		report.user_id = user.to_i
+			  		report.save!
+				    Question.all.each do |q|
+				      Answer.create!(question_id: q.id, report_id: report.id, file: nil)		
+					end
+				end	
 			end	
 		end
 		# respond_with project_user

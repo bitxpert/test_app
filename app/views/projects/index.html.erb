@@ -32,9 +32,9 @@
             <%#= link_to "Download Detailed Report", detail_report_project_path(project, { format: :pdf}), class: "btn btn-sm btn-info" %>
             <%= link_to "Send Incident Report", project_incidents_path(project), class: "btn btn-sm btn-primary" %>
             <%= link_to "Create Incident Report", new_project_incident_path(project), class: "btn btn-sm btn-success" %>
-            <%= link_to "Reports", report_project_path(project), class: "btn btn-sm btn-info"%>       
+            <%= link_to "Checklists", report_project_path(project), class: "btn btn-sm btn-info"%>       
 
-            <%= link_to "View Reports", project_reports_path(project), class: "btn btn-sm btn-warning" %>
+            <%= link_to "View Checklists", project_reports_path(project), class: "btn btn-sm btn-warning" %>
             <% if current_user.role == "client" %>
               <%= link_to "Assign to user", assign_project_project_path(project), class: "btn btn-sm btn-primary" %>
             <% end %>  

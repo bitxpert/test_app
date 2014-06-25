@@ -19,7 +19,7 @@
 						</td>
 					<td>
 						<!-- <a href="<%= edit_user_registration_path(user.id) %>" class="btn btn-primary btn-sm">Edit</a> -->
-						<%= link_to 'Destroy', user_path(user), :confirm => 'Are you sure?', :method => :delete, :class=>"btn btn-danger btn-xs" %>
+						<%= link_to 'Delete', user_path(user), :confirm => 'Are you sure?', :method => :delete, :class=>"btn btn-danger btn-xs" %>
 						</td>
 				</tr>	
 			<% end %>
