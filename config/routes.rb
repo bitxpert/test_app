@@ -28,7 +28,8 @@ TestApp::Application.routes.draw do
 
 
     
-
+    resources :questions, only: [:index]
+    resources :categories, only: [:index]
     resources :projects do
       member do 
         get 'detail_report'
