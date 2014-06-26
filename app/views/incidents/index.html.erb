@@ -1,11 +1,12 @@
-<h1>Listing incidents</h1>
+<h1><%= @project.name %> incidents</h1>
+
 <% if @incidents.present? %>
 
 
 <table class="table table-bordered table-striped table-condensed">
   <thead>
     <tr>
-      <th>Report type</th>
+      <th>Date</th>
       <th>Your name</th>
       <th>Job title</th>
       <!-- <th>Injury date</th> -->
@@ -24,7 +25,7 @@
   <tbody>
     <% @incidents.each do |incident| %>
       <tr>
-        <td><%= incident.report_type %></td>
+        <td><%= incident.created_at.strftime("%m/%d/%Y") %></td>
         <td><%= incident.your_name %></td>
         <td><%= incident.job_title %></td>
         <!-- <td><%#= incident.injury_date.strftime("%a  %d - %m - %Y") %></td> -->
@@ -37,7 +38,7 @@
         <!-- <td><%#= incident.ppe_used %></td> -->
         <!-- <td><%#= incident.medical_assistance_provided %></td> -->
         <td><%= link_to 'Show', project_incident_path(@project, incident), class: "btn btn-xs btn-primary" %>
-        <%= link_to 'send email', send_email_incident_path(incident), class: "btn btn-xs btn-success" %>
+        <%#= link_to 'send email', send_email_incident_path(incident), class: "btn btn-xs btn-success" %>
         <%= link_to 'Download Report', send_new_incident_incident_path(incident, {format: :pdf}), class: "btn btn-xs btn-primary" %>
         </td>
       </tr>

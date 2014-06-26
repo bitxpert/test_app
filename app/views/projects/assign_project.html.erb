@@ -6,6 +6,7 @@
 <%#= hidden_field_tag 'active_class', 'create_project'%>
 <div class="row">
   <div class="col-lg-6 col-lg-offset-3">
+  <h1><%= @project.name %></h1>
     <%= form_for @project,:url=>add_users_projects_path, html: { class: 'well form-horizontal', role: 'form', method: :post} do |f| %>
       <%= hidden_field_tag 'projectid', @project.id %>
       <fieldset>

@@ -59,9 +59,10 @@
 </script>
 <%= hidden_field_tag :report_id, @report.id %>
 <%= hidden_field_tag :project_id, @report.project.id %>
-<%= link_to "<< Back",project_reports_path(@project,@report) %>
+<%= link_to "<< Back",project_reports_path(@project) %>
 <br/>
-<table class="table table-bordered table-striped table-condensed">
+<h1><%= @project.name %></h1>
+<!-- <table class="table table-bordered table-striped table-condensed">
     <thead>
       <th>Name</th>
       <th>Action</th>
@@ -75,12 +76,12 @@
             </td>
         </tr>
     </tbody>  
-</table> 
+</table>  -->
 
 <%= form_for @report,:url=> edit_project_report_path(@project,@report), html: { class: 'well', role: 'form'} do |f| %>
 
 	<fieldset>
-	  <h2 class="text-center"><strong><u>Detailed View of <%= @report.name %></u></strong> </h2>
+	  <h2 class="text-center"><strong><u><%= @report.created_at.to_date %> Checklist</u></strong> </h2>
 	  <br/>
 		<%= f.hidden_field :enable_answers_validation, value: true %>
 		

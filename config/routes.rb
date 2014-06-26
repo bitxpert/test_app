@@ -20,7 +20,11 @@ TestApp::Application.routes.draw do
   # You can have the root of your site routed with "root"
     root 'home#index'
     resources :invitations
-    resources :users
+    resources :users do 
+      member do
+        get 'projects'
+      end
+    end
 
 
     
@@ -30,6 +34,8 @@ TestApp::Application.routes.draw do
         get 'detail_report'
         get 'assign_project'
         get 'report'
+        get 'users'
+        get 'unassign'
       end
       collection do 
         post 'add_users'

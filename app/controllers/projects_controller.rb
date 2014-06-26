@@ -2,7 +2,7 @@ class ProjectsController < ApplicationController
 	before_action :authenticate_user!
 	before_action :check_user
 	before_action :set_project, only: [:show, :edit, :update, :destroy, :detail_report]
-	respond_to :html, :json, only: [:index, :new, :create, :edit, :update, :show, :destroy,:assign_project,:add_users,:reports]
+	respond_to :html, :json, only: [:index, :new, :create, :edit, :update, :show, :destroy,:assign_project,:add_users,:reports,:users]
 	
 	def index
 		@projects = current_user.whole_projects
@@ -89,6 +89,19 @@ class ProjectsController < ApplicationController
 		
 	end
 
+	def users
+		@project = Project.find(params[:id])
+		@users = @project.users
+		respond_with @users
+	end
+
+	def unassign
+		@project = Project.find(params[:id])
+		proj_user = ProjectsUsers.where(project_id: @project.id, user_id: params[:uid]).first
+		proj_user.destroy if proj_user.present?
+		flash[:success] = "Unassigned successfully."
+		redirect_to users_project_path(@project)
+	end
 
 	def edit
 		respond_with @project
