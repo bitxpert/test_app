@@ -85,7 +85,7 @@ class ProjectsController < ApplicationController
 		@uname = user.first_name || user.last_name
 		@days_30 = @project.reports.where("created_at >= ?", Date.today-30.days).count
 		@days_60 = @project.reports.where("created_at >= ?", Date.today-60.days).count
-		@days_90 = @project.reports.where("created_at >= ?", Date.today-90.days).count
+		@days_90 = @project.reports.where("created_at >= ? OR created_at< ?", Date.today-90.days,Date.today-90.days).count
 		
 	end
 
@@ -129,7 +129,8 @@ class ProjectsController < ApplicationController
 
 	def assign_project
 		@project = Project.find(params[:id])
-		respond_with @project
+		@users = current_user.subordinates
+		# respond_with @project
 	end
 
 

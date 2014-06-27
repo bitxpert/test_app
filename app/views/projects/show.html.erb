@@ -87,7 +87,7 @@
 			<td><%= @project.address %></td>
 			<td>
             	<%= link_to "Edit", edit_project_path(@project), class: "btn btn-default btn-sm" %>
-            	            <%= link_to "View reports", project_reports_path(@project), class: "btn btn-sm btn-warning" %>
+            	            <%= link_to "View Checklists", project_reports_path(@project), class: "btn btn-sm btn-warning" %>
 
 				<%= link_to "Download detail report", detail_report_project_path(@project, { format: :pdf}), class: "btn btn-sm btn-info" %>
 				<%= link_to "Send incident", new_project_incident_path(@project), class: "btn btn-sm btn-primary" %>
