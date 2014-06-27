@@ -80,13 +80,35 @@ class ProjectsController < ApplicationController
 	end	
 
 	def report
+		@red_30 = false
+		@red_60 = false
+		@red_90 = false
 		@project = Project.find(params[:id])
 		user = User.find(ProjectsUsers.find_by_project_id(@project.id).user_id)
 		@uname = user.first_name || user.last_name
-		@days_30 = @project.reports.where("created_at >= ?", Date.today-30.days).count
-		@days_60 = @project.reports.where("created_at >= ?", Date.today-60.days).count
-		@days_90 = @project.reports.where("created_at >= ? OR created_at< ?", Date.today-90.days,Date.today-90.days).count
-		
+		@reports_30 = @project.reports.where("created_at >= ?", Date.today-30.days)
+		@days_30 = @reports_30.count
+		@reports_30 && @reports_30.each do |rep|
+			if rep.answers.where(status: 2).present?
+				@red_30 = true
+			end
+		end
+		@reports_60 = @project.reports.where("created_at >= ?", Date.today-60.days)
+		@days_60 = @reports_60.count
+		@reports_60 && @reports_60.each do |rep|
+			if rep.answers.where(status: 2).present?
+				@red_60 = true
+			end
+		end
+
+		# @reportsports_90 = @project.reports.where("created_at >= ? OR created_at< ?", Date.today-90.days,Date.today-90.days)
+		@reports_90 = @project.reports
+		@days_90 = @reports_90.count
+		@reports_90 && @reports_90.each do |rep|
+			if rep.answers.where(status: 2).present?
+				@red_90 = true
+			end
+		end		
 	end
 
 	def users

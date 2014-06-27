@@ -13,9 +13,27 @@
         <tr>
           <!-- <td><%#= @project.name %></td> -->
           <td><%= @uname %></td>
-          <td> <%= link_to "#{@days_30}", project_reports_path(@project) %></td>
-          <td><%= link_to "#{@days_60}", project_reports_path(@project) %></td>
-          <td><%= link_to "#{@days_90}", project_reports_path(@project) %></td>
+          <td>
+            <% if @red_30 != true %>
+              <%= link_to "#{@days_30}", project_reports_path(@project) %>
+            <% else %>
+              <%= link_to "#{@days_30}", project_reports_path(@project), style: "color: red;" %>
+            <% end %>
+          </td>
+          <td>
+            <% if @red_60 != true %>
+              <%= link_to "#{@days_60}", project_reports_path(@project) %>
+            <% else %>
+              <%= link_to "#{@days_60}", project_reports_path(@project), style: "color: red;" %>
+            <% end %>
+          </td>
+          <td>
+            <% if @red_90 != true %>
+              <%= link_to "#{@days_90}", project_reports_path(@project) %>
+            <% else %>
+              <%= link_to "#{@days_90}", project_reports_path(@project), style: "color: red;" %>
+            <% end %>
+          </td>
         </tr>
       <%# end %>   
     </tbody>  
