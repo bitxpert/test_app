@@ -25,6 +25,12 @@ class ReportsController < ApplicationController
 		# respond_with :obj => {project: @project, categories: @categories, answers: @answers}
 	end
 
+	def answers
+		@report = Report.find(params[:id])
+		@answers = @report.answers
+		respond_with @answers
+	end
+
 	def detail_report
 		@report = Report.find(params[:id])
   		respond_to do |format|

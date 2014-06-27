@@ -27,8 +27,12 @@ class UsersController < ApplicationController
 			end
 			@user.save!
 			
-			flash[:notice] = "User has been added successfully."
-			return redirect_to users_path
+			# flash[:notice] = "User has been added successfully."
+			# return redirect_to users_path
+			respond_to do |format|
+		        format.html { redirect_to users_path, notice: 'User has been added successfully.' }
+		        format.json { render :json=> true }
+	    	end
 		else
 			return render "new"
 		end

@@ -29,7 +29,11 @@ TestApp::Application.routes.draw do
 
     
     resources :questions, only: [:index]
-    resources :categories, only: [:index]
+    resources :categories, only: [:index] do 
+      member do
+        get 'questions'
+      end
+    end
     resources :projects do
       member do 
         get 'detail_report'
@@ -51,8 +55,20 @@ TestApp::Application.routes.draw do
         member do
           get 'detail_report'
         end
+
       end
       resources :incidents, only: [:new, :create, :index, :show]
+    end
+
+    resources :reports, only: [] do
+      member do
+        get 'answers'
+      end 
+      resources :categories, only: [] do
+        member do
+          get 'answers'
+        end
+      end
     end
 
     resources :incidents, only: [] do
