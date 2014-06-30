@@ -1,6 +1,8 @@
 class IncidentsController < ApplicationController
   before_action :set_project, only: [ :index,:new, :create, :show]
   before_action :set_incident, only: [:show]
+  before_action :authenticate_user!
+
   respond_to :html, :json, only: [:index, :new, :show]
 
   # GET /incidents
