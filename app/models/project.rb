@@ -13,14 +13,14 @@ class Project < ActiveRecord::Base
 	after_create :create_answers
   	
   	def create_answers
-  		report = self.reports.build
-  		# report.name = Date.today.to_s
-  		report.name = "#{self.name} Report #{Date.today.to_s}"
-  		report.save!
-	    Question.all.each do |q|
-	      # report.answers.create!(question_id: q.id)
-	      # report.answers << Answer.create!(question_id: q.id)
-	      Answer.create!(question_id: q.id, report_id: report.id, file: nil)	
-	    end
+  		# report = self.reports.build
+  		# # report.name = Date.today.to_s
+  		# report.name = "#{self.name} Report #{Date.today.to_s}"
+  		# report.save!
+	   #  Question.all.each do |q|
+	   #    # report.answers.create!(question_id: q.id)
+	   #    # report.answers << Answer.create!(question_id: q.id)
+	   #    Answer.create!(question_id: q.id, report_id: report.id, file: nil)	
+	    # end
   	end
 end

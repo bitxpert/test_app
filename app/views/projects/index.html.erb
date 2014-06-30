@@ -10,9 +10,10 @@
 <%= hidden_field_tag 'active_class', 'all_projects'%>
 <% if @projects.present? %>  
   <%#= link_to "Reports", report_projects_path, class: "btn btn-sm btn-info pull-right" ,style: "margin-bottom: 8px;"%>
+  <h1>Project List</h1>
   <table class="table table-bordered table-striped table-condensed">
     <thead>
-      <th>Name</th>
+      <th>Project Name</th>
       <th>Contact Info</th>
       <th>Address</th>
       <th>Action</th>
@@ -30,15 +31,15 @@
           <td>
             <%#= link_to "show", project_path(project), class: "btn btn-default btn-sm" %>
             <%#= link_to "Download Detailed Report", detail_report_project_path(project, { format: :pdf}), class: "btn btn-sm btn-info" %>
-            <%= link_to "Send Incident Report", project_incidents_path(project), class: "btn btn-sm btn-primary" %>
-            <%= link_to "Create Incident Report", new_project_incident_path(project), class: "btn btn-sm btn-success" %>
-            <%= link_to "Reports", report_project_path(project), class: "btn btn-sm btn-info"%>       
-
-            <%= link_to "View Reports", project_reports_path(project), class: "btn btn-sm btn-warning" %>
+            <%#= link_to "Send Incident Report", project_incidents_path(project), class: "btn btn-sm btn-primary" %>
+            <%= link_to "Incident Report", project_incidents_path(project), class: "btn btn-xs btn-success" %>
+            <%= link_to "Checklists", report_project_path(project), class: "btn btn-xs btn-info"%>       
+            <%= link_to "users", users_project_path(project), class: "btn btn-xs btn-warning" %>
+            <%#= link_to "View Checklists", project_reports_path(project), class: "btn btn-sm btn-warning" %>
             <% if current_user.role == "client" %>
-              <%= link_to "Assign to user", assign_project_project_path(project), class: "btn btn-sm btn-primary" %>
+              <%= link_to "Assign to user", assign_project_project_path(project), class: "btn btn-xs btn-primary" %>
             <% end %>  
-            <%= link_to 'Delete', project, data: { confirm: 'Are you sure?' }, method: :delete, class: "btn btn-sm btn-danger" %>
+            <%= link_to 'Delete', project, data: { confirm: 'Are you sure?' }, method: :delete, class: "btn btn-xs btn-danger" %>
             </td>
         </tr>
       <% end %>   

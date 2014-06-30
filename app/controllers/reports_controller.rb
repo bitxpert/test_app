@@ -2,7 +2,8 @@ class ReportsController < ApplicationController
 	respond_to :html, :json
 	def index
 		@project = Project.find(params[:project_id])
-		@reports = @project.reports.order("created_at ASC")
+		@reports = @project.reports.order("created_at ASC").group("date(created_at)")
+		# @project.reports.select("date(created_at)".group("date(created_at)")
 		respond_with :obj => {:@project=> @project,:@reports=>@reports }
 	end
 
@@ -24,6 +25,12 @@ class ReportsController < ApplicationController
 		# respond_with :obj => {project: @project, categories: @categories, answers: @answers}
 	end
 
+	def answers
+		@report = Report.find(params[:id])
+		@answers = @report.answers
+		respond_with @answers
+	end
+
 	def detail_report
 		@report = Report.find(params[:id])
   		respond_to do |format|
@@ -36,3 +43,4 @@ class ReportsController < ApplicationController
  		end
 	end
 end
+

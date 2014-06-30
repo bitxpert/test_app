@@ -1,26 +1,68 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 
-		$('.answer_status').click(function(){
+		// $('.answer_status').click(function(){
+		// 	var $this = $(this);
+		// 	$.ajax({
+	 //          type: 'patch',
+	 //          url: '/projects/'+ $('#project_id').val() +'/answers/' + $this.attr('data-id'),
+	 //          dataType: 'json',
+	 //          data: {
+	 //          	status: $this.val(),
+	 //          	report: $('#report_id').val()
+	 //          }
+	 //        }); // end of ajax
+		// });
+	$('.answer_status').click(function(){
 			var $this = $(this);
 			$.ajax({
-	          type: 'patch',
-	          url: '/projects/'+ $('#project_id').val() +'/answers/' + $this.attr('data-id'),
+	          type: 'get',
+	          url: '/projects/'+ $('#project_id').val() +'/answers/' + $this.attr('data-id') + '/check_answer',
 	          dataType: 'json',
 	          data: {
-	          	status: $this.val(),
-	          	report: $('#report_id').val()
+	          	id: $this.attr('data-id')
+	          },
+	          success :function(data){
+	          	if(data == true)
+	          	{
+	          		bootbox.prompt("Please Enter Reason?", function(result) {                
+					  if (result === null) {                                             
+					    // Example.show("Prompt dismissed");                              
+					  } else {
+						$.ajax({
+				          type: 'patch',
+				          url: '/projects/'+ $('#project_id').val() +'/answers/' + $this.attr('data-id'),
+				          dataType: 'json',
+				          data: {
+				          	status: $this.val(),
+				          	note: result
+				          }
+			        	});  	
+					  }
+					});
+	          	}else{
+					$.ajax({
+			          type: 'patch',
+			          url: '/projects/'+ $('#project_id').val() +'/answers/' + $this.attr('data-id'),
+			          dataType: 'json',
+			          data: {
+			          	status: $this.val(),
+			          	id: $this.attr('data-id')
+			          }
+		        	});
+	          	}
 	          }
-	        }); // end of ajax
+	        });
 		});
 
 	});
 </script>
 <%= hidden_field_tag :report_id, @report.id %>
 <%= hidden_field_tag :project_id, @report.project.id %>
-<%= link_to "<< Back",project_reports_path(@project,@report) %>
+<%= link_to "<< Back",project_reports_path(@project) %>
 <br/>
-<table class="table table-bordered table-striped table-condensed">
+<h1><%= @project.name %></h1>
+<!-- <table class="table table-bordered table-striped table-condensed">
     <thead>
       <th>Name</th>
       <th>Action</th>
@@ -34,12 +76,12 @@
             </td>
         </tr>
     </tbody>  
-</table> 
+</table>  -->
 
 <%= form_for @report,:url=> edit_project_report_path(@project,@report), html: { class: 'well', role: 'form'} do |f| %>
 
 	<fieldset>
-	  <h2 class="text-center"><strong><u>Detailed View of <%= @report.name %></u></strong> </h2>
+	  <h2 class="text-center"><strong><u><%= @report.created_at.to_date %> Checklist</u></strong> </h2>
 	  <br/>
 		<%= f.hidden_field :enable_answers_validation, value: true %>
 		

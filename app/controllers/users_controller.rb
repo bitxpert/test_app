@@ -3,6 +3,7 @@ class UsersController < ApplicationController
 	before_filter :admin_or_client_only, only: [:new, :create, :destroy, :index]
 	before_filter :find_user, only: [:edit, :destroy]
 	respond_to :html,:json
+	
 	def new
 		@user = User.new
 		if current_user.admin?
@@ -13,6 +14,7 @@ class UsersController < ApplicationController
 		end
 		respond_with @user
 	end
+	
 	def create
 		@user = User.new(user_params)
 		if @user.save
@@ -25,16 +27,22 @@ class UsersController < ApplicationController
 			end
 			@user.save!
 			
-			flash[:notice] = "User has been added successfully."
-			return redirect_to users_path
+			# flash[:notice] = "User has been added successfully."
+			# return redirect_to users_path
+			respond_to do |format|
+		        format.html { redirect_to users_path, notice: 'User has been added successfully.' }
+		        format.json { render :json=> true }
+	    	end
 		else
 			return render "new"
 		end
 	end
+	
 	def index
 
 		if current_user.admin?
-			@users = User.all
+			# @users = User.all
+			@users = User.where(role: "client")
 		else
 			@users = current_user.subordinates
 		end
@@ -47,11 +55,22 @@ class UsersController < ApplicationController
 		flash[:success] = "successfully destroyed."
 		redirect_to users_path
 	end
+	
 	def edit
 		return redirect_to root_path if !current_user.admin? && current_user.id.to_s != params[:id]
 		@user = User.find(params[:id])
 	end
-	
+
+	def show
+		@user = User.find(params[:id])
+		respond_with @user
+	end
+
+	# def projects
+	# 	user = User.find(params[:id])
+	# 	@projects = user.projects
+	# 	respond_with @projects
+	# end
 
 	private
 	def find_user
