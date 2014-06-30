@@ -10,9 +10,9 @@ class AnswersController < ApplicationController
 				@answer.notes = params[:note]
 				@answer.save!
 			end 
-			respond_with true
+			return render json: true
 		else
-			respond_with false
+			return render json: false
 		end
 	end
 

@@ -53,7 +53,7 @@ class SessionsController < Devise::SessionsController
   
   def destroy
     sign_out(resource_name)
-resource.try(:tokens).try(:destroy_all)
+    resource.try(:tokens).try(:destroy_all)
     
     respond_to do |format|
 	        format.html { redirect_to root_path}
