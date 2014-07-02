@@ -26,6 +26,8 @@ class AnswersController < ApplicationController
 	end
 
 
+
+
 	def update_answer
 		answer = Answer.find(params[:id])
 		
