@@ -40,10 +40,12 @@ class IncidentsController < ApplicationController
     respond_to do |format|
       if @incident.save
         format.html { redirect_to projects_path({inc: @incident.id}), notice: 'Incident was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @incident }
+        format.json {  render json: :true}  
+        # format.json { render action: 'show', status: :created, location: @incident }
       else
         format.html { render action: 'new' }
-        format.json { render json: @incident.errors, status: :unprocessable_entity }
+        format.json { render json: :true}
+        # format.json { render json: @incident.errors, status: :unprocessable_entity }
       end
     end
   end
