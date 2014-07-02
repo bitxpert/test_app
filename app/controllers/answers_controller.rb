@@ -30,15 +30,26 @@ class AnswersController < ApplicationController
 		answer = Answer.find(params[:id])
 		
 		answer.notes = params[:answer][:notes]
-		answer.remote_file_url = params[:answer][:file]
+		# answer.remote_file_url = params[:answer][:file]
+		answer.file = uploaded_picture(params[:answer][:file])
 		answer.save!
 		return render :json=> true
 	end
-	private
+private
 	def set_project_and_answer
 		@report = Report.find(params[:report])
 		# @project = current_user.whole_projects.find(params[:project_id])
 		@answer = @report.answers.find(params[:id])
 	end
 
+  	def uploaded_picture(base64)
+
+	    tempfile = Tempfile.new ['upload', 'jpg']
+	    tempfile.binmode
+	    tempfile.write(Base64.decode64(base64))
+
+	    # ActionDispatch::Http::UploadedFile.new(tempfile: tempfile,
+	    #   filename: 'upload.jpg')
+		tempfile
+	end
 end
