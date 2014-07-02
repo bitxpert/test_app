@@ -31,9 +31,7 @@ class AnswersController < ApplicationController
 		
 		answer.notes = params[:answer][:notes]
 		# answer.remote_file_url = params[:answer][:file]
-		puts "======================"
 		answer.file = uploaded_picture(params[:answer][:file])
-		puts "======================="
 		answer.save!
 		return render :json=> true
 	end
