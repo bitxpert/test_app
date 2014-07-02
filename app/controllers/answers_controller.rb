@@ -33,7 +33,7 @@ class AnswersController < ApplicationController
 		
 		answer.notes = params[:answer][:notes]
 		# answer.remote_file_url = params[:answer][:file]
-		answer.file = uploaded_picture(params[:answer][:file])
+		answer.file = uploaded_picture(params[:answer][:file]) if params[:answer][:file].present?
 		answer.save!
 		return render :json=> true
 	end
