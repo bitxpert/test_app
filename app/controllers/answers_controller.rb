@@ -30,7 +30,7 @@ class AnswersController < ApplicationController
 		answer = Answer.find(params[:id])
 		
 		answer.notes = params[:answer][:notes]
-		answer.file = params[:answer][:file]
+		answer.remote_file_url = params[:answer][:file]
 		answer.save!
 		return render :json=> true
 	end
