@@ -90,8 +90,12 @@
 			<h3><strong><u><%= c.name %></u></strong></h3>
 			<% c.questions.each do |q| %>
 				<div class="form-group">		
+				<% answer = @answers.find_by(question_id: q.id) %>
+		            		<% if(answer.status == 2)  %>
+					<%= f.label q.body, class: "control-label", style: "color: red" %>
+					<% else %>
 					<%= f.label q.body, class: "control-label" %>
-		            <% answer = @answers.find_by(question_id: q.id) %>
+			     	<% end %>
 			     	<div class="row">
 				     	<% GlobalConstants::Answers::STATUSES.each do |st| %> 
 					      	<div class="col-sm-3">
