@@ -84,8 +84,14 @@ class ProjectsController < ApplicationController
 		@red_60 = false
 		@red_90 = false
 		@project = Project.find(params[:id])
-		user = User.find(ProjectsUsers.find_by_project_id(@project.id).user_id)
-		@uname = user.first_name || user.last_name
+		@all_users = ProjectsUsers.where(project_id: params[:id])
+		aa = ""
+		@all_users.each do |usr|
+      		user = User.find(usr.user_id)
+      		@uname = user.first_name || user.last_name
+      		aa = "#{@uname},#{aa}"
+    		end
+    		@uname = aa.chomp(",")
 		@reports_30 = @project.reports.where("created_at >= ?", Date.today-30.days)
 		@days_30 = @reports_30.count
 		@reports_30 && @reports_30.each do |rep|
