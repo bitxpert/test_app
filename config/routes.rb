@@ -28,7 +28,13 @@ TestApp::Application.routes.draw do
 
 
     
-    resources :questions, only: [:index]
+    resources :questions, only: [:index] do
+      resources :reports, only: [] do 
+        member do
+          get 'get_answer'
+        end
+      end
+    end
     resources :categories, only: [:index] do 
       member do
         get 'questions'
@@ -49,6 +55,7 @@ TestApp::Application.routes.draw do
         member do
            patch 'update_answer'
            get 'check_answer'
+           
         end
       end
       resources :reports do 
