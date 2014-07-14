@@ -4,4 +4,5 @@ class QuestionsController < ApplicationController
 		@questions = Question.all
 		respond_with @questions
 	end
+	
 end

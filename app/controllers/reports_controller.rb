@@ -7,6 +7,13 @@ class ReportsController < ApplicationController
 		respond_with :obj => {:@project=> @project,:@reports=>@reports }
 	end
 
+	def get_answer
+		# @question = Question.find(params[:question_id])
+		@answers  = Answer.where(question_id: params[:question_id], report_id: params[:id])
+		# @answers  = @question.answers
+		respond_with @answers
+	end
+
 	def destroy
 		report = Report.find(params[:id])
 		report.destroy
