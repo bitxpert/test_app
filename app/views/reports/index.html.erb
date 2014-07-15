@@ -27,13 +27,13 @@
             <% end %>
           </td>
           <td>
-            <%  reports = @project.reports.where("reports.created_at >= ? AND reports.created_at <= ?", report.created_at.to_date, "#{report.created_at.to_date} 23:59:59.996") %>
-              <% reports && reports.each do |rep| %> 
-               <% user = User.find(rep.user_id) 
-                if user.present? %>
-                  <%= user.first_name || user.last_name || '' %>,
-                <% end %>
-              <% end %>
+            <%#  reports = @project.reports.where("reports.created_at >= ? AND reports.created_at <= ?", report.created_at.to_date, "#{report.created_at.to_date} 23:59:59.996") %>
+              <%# reports && reports.each do |rep| %> 
+               <% user = User.find(report.user_id) %> 
+                <%# if user.present? %>
+                  <%= user.first_name || user.last_name || '' %>
+                <%# end %>
+              <%# end %>
             </td>
           <td>
             <%= link_to "Download Checklist",detail_report_project_report_path(@project,report ,{ format: :pdf}), class: "btn btn-success btn-xs" %>
