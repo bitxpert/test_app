@@ -47,6 +47,7 @@ TestApp::Application.routes.draw do
         get 'report'
         get 'users'
         get 'unassign'
+        get 'submit_report'
       end
       collection do 
         post 'add_users'
@@ -54,15 +55,13 @@ TestApp::Application.routes.draw do
       resources :answers, only: [:update] do
         member do
            patch 'update_answer'
-           get 'check_answer'
-           
+           get 'check_answer'  
         end
       end
       resources :reports do 
         member do
           get 'detail_report'
         end
-
       end
       resources :incidents, only: [:new, :create, :index, :show]
     end
