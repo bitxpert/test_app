@@ -14,6 +14,20 @@ class ProjectsController < ApplicationController
 		respond_with @project
 	end
 
+	def submit_report
+		@project = Project.find(params[:id])
+		token = Token.find_by_api(params[:authenticity_token])
+		user = token.user		
+		report = @project.reports.build
+		report.name = "#{@project.name} Report #{Date.today.to_s}"
+  		report.user_id = user.id
+  		report.save!
+	    Question.all.each do |q|
+	      Answer.create!(question_id: q.id, report_id: report.id, file: nil)		
+		end
+		return render :json=> true
+	end
+
 	def create
 		user_client = current_user.client
 		params[:project][:creator_id] = current_user.id 
