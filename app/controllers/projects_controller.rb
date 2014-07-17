@@ -79,6 +79,8 @@ class ProjectsController < ApplicationController
 	end	
 
 	def update_answer
+		puts "======="*90
+		puts "project"
 		answer = Answer.find(params[:id])
 		
 		answer.notes = params[:answer][:notes]
