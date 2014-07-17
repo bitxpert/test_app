@@ -48,8 +48,10 @@ TestApp::Application.routes.draw do
         get 'users'
         get 'unassign'
         get 'submit_report'
+        patch 'update_answer'
       end
       collection do 
+
         post 'add_users'
       end
       resources :answers, only: [:update] do

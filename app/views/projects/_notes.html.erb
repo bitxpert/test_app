@@ -14,7 +14,7 @@
 	}
 </style>
 
-<%= form_for @answer1,:url=>update_answer_project_answer_path(@project,@answer1), remote: :true, html: {id: "#{@answer1.id}-answer",role: 'form' ,method: :patch , multipart: true} do |f| %>
+<%= form_for @answer1,:url=>update_answer_project_path(@answer1), remote: :true, html: {id: "#{@answer1.id}-answer",role: 'form' ,method: :patch , multipart: true} do |f| %>
 
 		<%= f.hidden_field  "answer-#{@answer1.id}", value: @answer1.id %>
 		<%= f.hidden_field :project, value: @project.id %>

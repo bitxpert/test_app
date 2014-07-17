@@ -31,6 +31,8 @@ class AnswersController < ApplicationController
 
 
 	def update_answer
+		puts "-------"*90
+		puts "answer"
 		answer = Answer.find(params[:id])
 		
 		answer.notes = params[:answer][:notes]
