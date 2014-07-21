@@ -25,7 +25,7 @@ class ProjectsController < ApplicationController
 	    Question.all.each do |q|
 	      Answer.create!(question_id: q.id, report_id: report.id, file: nil)		
 		end
-		return render :json=> true
+		return render :json=> report
 	end
 
 	def create
