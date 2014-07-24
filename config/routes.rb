@@ -29,6 +29,9 @@ TestApp::Application.routes.draw do
 
     
     resources :questions, only: [:index] do
+      member do
+        get 'get_question'
+      end
       resources :reports, only: [] do 
         member do
           get 'get_answer'
