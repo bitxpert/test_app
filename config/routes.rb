@@ -35,6 +35,7 @@ TestApp::Application.routes.draw do
       resources :reports, only: [] do 
         member do
           get 'get_answer'
+          get 'getanswerid'
         end
       end
     end
@@ -74,6 +75,7 @@ TestApp::Application.routes.draw do
     resources :reports, only: [] do
       member do
         get 'answers'
+
       end 
       resources :categories, only: [] do
         member do

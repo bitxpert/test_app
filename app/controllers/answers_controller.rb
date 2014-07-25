@@ -25,10 +25,6 @@ class AnswersController < ApplicationController
 		end
 	end
 
-	
-
-
-
 
 	def update_answer
 		puts "-------"*90
