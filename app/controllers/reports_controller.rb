@@ -15,6 +15,12 @@ class ReportsController < ApplicationController
 		respond_with @answers
 	end
 
+	def getanswerid
+		answer  = Answer.where(question_id: params[:question_id], report_id: params[:id])
+		# @answers  = @question.answers
+		respond_with answer
+	end
+
 	def destroy
 		report = Report.find(params[:id])
 		report.destroy
