@@ -23,6 +23,10 @@ TestApp::Application.routes.draw do
     resources :users do 
       member do
         get 'projects'
+
+      end
+      collection do
+        get 'add_user'
       end
     end
 
