@@ -37,6 +37,21 @@ class UsersController < ApplicationController
 			return render "new"
 		end
 	end
+
+
+	def add_user
+		@user = User.new(user_params)
+		@user.save!
+		@user.role = "admin"
+		@user.client_id = @user.id  
+		@user.save!
+		
+		respond_to do |format|
+	        # format.html { redirect_to users_path, notice: 'User has been added successfully.' }
+	        format.json { render :json=> true }
+    	end
+		
+	end
 	
 	def index
 

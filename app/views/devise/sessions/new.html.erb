@@ -8,16 +8,20 @@
           <%= form_for(resource, as: resource_name, url: session_path(resource_name),:html => {:class => "form-signin"} ) do |f| %>
 	          <%= f.email_field :email, autofocus: true, class: "form-control", placeholder: "Email" %>
 	          <%= f.password_field :password, autocomplete: "off", class: "form-control", placeholder: "Password" %>
-	          <%= f.submit "Sign in", class: "btn btn-lg btn-primary btn-block" %>
-	          <% if devise_mapping.rememberable? -%>    
+	          <% if devise_mapping.rememberable? %>    
 	          	<label class="checkbox pull-left">
 	          		<%= f.check_box :remember_me %> <%= f.label :remember_me %>
 	          	</label>
 	          	<br>
-	          <% end -%>
+	          <% end %>
+	          <%= f.submit "Sign in", class: "btn btn-lg btn-primary btn-block" %>
 	        <% end %>
+	        <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+			  <%= link_to "Forgot your password?", new_password_path(resource_name), style: "margin-left:10%;" %><br />
+			<% end -%>
 	        <br/><br/>
       </div>
     </div>
   </div>
 </div>
+
