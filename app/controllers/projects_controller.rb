@@ -6,7 +6,11 @@ class ProjectsController < ApplicationController
 	
 	def index
 		@projects = current_user.whole_projects
-		respond_with @projects	
+		# if @projects.present?
+			respond_with @projects
+		# else
+		
+		# end	
 	end	
 
 	def new 
@@ -153,7 +157,7 @@ class ProjectsController < ApplicationController
 
 	def update
     	flash[:notice] = 'Project was successfully updated.' if @project.update(params_project)
-    	respond_with @project	
+    	return render json: :true	
 	end
 
 	def destroy
