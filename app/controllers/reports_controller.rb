@@ -1,12 +1,25 @@
 class ReportsController < ApplicationController
 	respond_to :html, :json
 	def index
+		id = []
+		@good_report = []
 		@project = Project.find(params[:project_id])
 		@reports = @project.reports.order("created_at ASC")
-		# .group("date(created_at)")
-		# @project.reports.select("date(created_at)".group("date(created_at)")
-		respond_with :obj => {:@project=> @project,:@reports=>@reports }
+		@reports.each do |rep|
+			if !rep.answers.where(status: [0,2,3]).present?
+				id << rep.id
+			end	
+		end
+		if id.length > 0
+			# puts "000"*90
+			@reports = @project.reports.where.not(id: id)			
+			@good_report = @project.reports.where(id: id)
+		end
+		# @answers = @project.reports.answers
+		respond_with :obj => {:@project=> @project,:@reports=>@reports, :@good_report=> @good_report }
+		# respond_with
 	end
+
 
 	def get_answer
 		# @question = Question.find(params[:question_id])

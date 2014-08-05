@@ -1,6 +1,6 @@
  class RegistrationsController  < Devise::RegistrationsController
   # before_filter :token_verification_of_referal, :except => [:create] 
-  before_filter :admin_or_client_only, only: [:new, :create]
+  # before_filter :admin_or_client_only, only: [:new, :create]
 
   def new
   end

@@ -67,3 +67,7 @@
     display: block;
     margin-top: 10px;
 }
+a.navbar-brand {
+width: 107px;
+}
+.navbar-brand img{ width: 53px;}
