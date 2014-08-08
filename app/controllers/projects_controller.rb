@@ -7,6 +7,8 @@ class ProjectsController < ApplicationController
 	def index
 		@projects = current_user.whole_projects
 		# if @projects.present?
+		# puts "----index"*90
+		puts @projects.inspect
 			respond_with @projects
 		# else
 		
@@ -33,6 +35,7 @@ class ProjectsController < ApplicationController
 	end
 
 	def create
+		# puts "===="*90
 		user_client = current_user.client
 		params[:project][:creator_id] = current_user.id 
 		@project = user_client.projects.build(params_project)
@@ -94,6 +97,7 @@ class ProjectsController < ApplicationController
 	end
 
 	def show
+		# puts "------"*90
 		@categories = Category.all.includes(:questions)
 		@answers = @project.reports.first.answers
 		respond_with :obj => {project: @project, categories: @categories, answers: @answers}
@@ -221,7 +225,9 @@ class ProjectsController < ApplicationController
 	end
 
 	def check_user
+		# puts "11111"*90
 		if current_user.role == 'admin'
+			# puts "0000"*90
 			flash[:notice] = 'You are not Authorise'
 			return redirect_to root_url
 		end	
