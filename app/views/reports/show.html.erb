@@ -1,18 +1,44 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 
-		// $('.answer_status').click(function(){
-		// 	var $this = $(this);
-		// 	$.ajax({
-	 //          type: 'patch',
-	 //          url: '/projects/'+ $('#project_id').val() +'/answers/' + $this.attr('data-id'),
-	 //          dataType: 'json',
-	 //          data: {
-	 //          	status: $this.val(),
-	 //          	report: $('#report_id').val()
-	 //          }
-	 //        }); // end of ajax
-		// });
+		$('.send_email_button').click(function(){
+			$(".sent_email").addClass("hidden");
+			var $this = $(this);
+			var q_id = $this.attr("id");
+			var email = $("#emailTxt").val();
+			var rep_id = $("#report_report_id").val();
+			
+			var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+			if( !emailReg.test( email ) ) 
+			{
+			    alert("Please enter correct email address")
+			} else {
+			    // return true;
+				$.ajax({
+		          type: 'get',
+		          url: '/incidents/'+ rep_id +'/send_email',
+		          dataType: 'json',
+		          data: {
+		          	email: email,
+		          	qid: q_id
+		          },
+		          success :function(data){
+		          	if(data == 'true')
+		          	{
+		          		// alert("email sent");
+		          		$(".sent_email").removeClass("hidden");
+		          		$("#emailTxt").val('')
+		          	}
+		          	else
+		          	{
+		          		alert("email not sent");
+		          	}
+		          }
+		        }); // end of ajax
+			}
+		});
+
+
 	$('.answer_status').click(function(){
 			var $this = $(this);
 			$.ajax({
@@ -53,7 +79,7 @@
 	          	}
 	          }
 	        });
-		});
+	});
 
 	});
 </script>
@@ -72,7 +98,7 @@
           <td><%= @report.name %></td>
           <td>
             <%#= link_to "show", project_path(project), class: "btn btn-default btn-sm" %>
-            <%= link_to 'Destroy', "#", data: { confirm: 'Are you sure?' }, method: :delete, class: "btn btn-xs btn-danger" %>
+            <%#= link_to 'Destroy', "#", data: { confirm: 'Are you sure?' }, method: :delete, class: "btn btn-xs btn-danger" %>
             </td>
         </tr>
     </tbody>  
@@ -83,18 +109,19 @@
 	<fieldset>
 	  <h2 class="text-center"><strong><u><%= @report.created_at.to_date %> Checklist</u></strong> </h2>
 	  <br/>
+	  <div class="alert alert-success sent_email hidden" >Email has been successfully sent.</div>
 		<%= f.hidden_field :enable_answers_validation, value: true %>
-		
+		<%= f.hidden_field :report_id,value:@report.id %>
 
 	  	<% @categories.each do |c| %>
 			<h3><strong><u><%= c.name %></u></strong></h3>
 			<% c.questions.each do |q| %>
 				<div class="form-group">		
-				<% answer = @answers.find_by(question_id: q.id) %>
-		            		<% if(answer.status == 2)  %>
-					<%= f.label q.body, class: "control-label", style: "color: red" %>
+					<% answer = @answers.find_by(question_id: q.id) %>
+		            <% if(answer.status == 2)  %>
+						<%= f.label q.body, class: "control-label", style: "color: red" %>
 					<% else %>
-					<%= f.label q.body, class: "control-label" %>
+						<%= f.label q.body, class: "control-label" %>
 			     	<% end %>
 			     	<div class="row">
 				     	<% GlobalConstants::Answers::STATUSES.each do |st| %> 
@@ -103,7 +130,12 @@
 					      		<%= label "status#{answer.id}_#{st[1]}", st[0] %>	
 					      	</div> 
 				        <% end %>
-			        </div>
+				        <br/>
+				          <div class="control-group col-xs-3">
+				            <!-- <label class="control-label">Email</label>   -->
+				            <input type="text" id="emailTxt" name="emailTxt" />
+				            <%=link_to  "Send","javascript:void(0)" ,class: "btn btn-xs btn-primary send_email_button", :id=> "#{q.id}" %>
+				          </div>
 			        <br/>
 		    	</div>
 			<% end %>

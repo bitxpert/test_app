@@ -91,6 +91,7 @@ TestApp::Application.routes.draw do
     resources :incidents, only: [] do
       member do 
         get 'send_new_incident'
+        post 'send_email'
         get 'send_email'
       end
     end
