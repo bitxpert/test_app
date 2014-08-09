@@ -50,12 +50,29 @@ class IncidentsController < ApplicationController
     end
   end
 
-  def send_email
-    incident = Incident.find(params[:id])
-    id = params[:id]
-    aa = UserMailer.send_incident_report(current_user,incident).deliver
-    flash[:success] = "Email sent successfully."
-    redirect_to :back
+  # def send_email
+  #   incident = Incident.find(params[:id])
+  #   id = params[:id]
+  #   aa = UserMailer.send_incident_report(current_user,incident).deliver
+  #   flash[:success] = "Email sent successfully."
+  #   redirect_to :back
+  # end
+
+    def send_email
+      question = Question.find(params[:qid])
+      answer = Answer.where(question_id: params[:qid], report_id: params[:id]).first
+      report = Report.find(params[:id])
+      project = report.project
+      category = question.category
+      to = params[:email]
+
+      id = params[:id]
+      aa = UserMailer.send_incident_report(current_user,question.body,project.name,category.name,answer,to).deliver
+      # flash[:success] = "Email sent successfully."
+      respond_to do |format|
+        format.html { redirect_to :back }
+        format.json { render json: :true }
+      end
   end
 
   # PATCH/PUT /incidents/1
