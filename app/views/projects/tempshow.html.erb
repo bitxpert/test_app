@@ -89,7 +89,7 @@
             	<%= link_to "Edit", edit_project_path(@project), class: "btn btn-default btn-sm" %>
             	            <%= link_to "View Checklists", project_reports_path(@project), class: "btn btn-sm btn-warning" %>
 
-				<%= link_to "Download detail report", detail_report_project_path(@project, {report: @report, format: :pdf}), class: "btn btn-sm btn-info" %>
+				<%= link_to "Download detail report", detail_report_project_path(@project, { format: :pdf}), class: "btn btn-sm btn-info" %>
 				<%= link_to "Send incident", new_project_incident_path(@project), class: "btn btn-sm btn-primary" %>
 				<%= link_to "View incidents", project_incidents_path(@project), class: "btn btn-sm btn-success" %>
             	<%= link_to 'Delete', @project, data: { confirm: 'Are you sure?' }, method: :delete, class: "btn btn-sm btn-danger" %>
@@ -105,9 +105,9 @@
 	  <h2 class="text-center"><strong><u>Detailed View of <%= @project.name %></u></strong> </h2>
 	  <br/>
 		<%#= f.hidden_field :enable_answers_validation, value: true %>
-	  	<% @category.questions.each do |q| %>
-			<!-- <h3><strong><u><%#= q.name %></u></strong></h3> -->
-			<%# c.questions.each do |q| %>
+	  	<% @categories.each do |c| %>
+			<h3><strong><u><%= c.name %></u></strong></h3>
+			<% c.questions.each do |q| %>
 				<div class="form-group">		
 					<%= "#{q.body}" %>
 		      		<% answer = @answers.find_by(question_id: q.id) %>
@@ -124,7 +124,7 @@
 		    	<div class="" style="margin-right: 0px;margin-left: 14px;">
 		       	<%= render partial: "notes", :locals => {:@answer1 => answer, :@project=>@project} %>
 		       </div>
-			<%# end %>
+			<% end %>
 		<% end %>
 	</fieldset>
 <%# end %>

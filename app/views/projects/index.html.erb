@@ -22,9 +22,10 @@
       <% @projects.each do |project|%>
         <tr>
           <% if project.reports.last.answers.where(status: 2).present? %>
-          <td><%= link_to project.name, project_path(project),style: "color: red;"%></td>
+          <td><%= link_to project.name, categories_project_path(project),style: "color: red;"%></td>
           <% else %>
-          <td><%= link_to project.name, project_path(project)%></td>
+          <td><%= link_to project.name, categories_project_path(project)%></td>
+              <!-- project_path(project) -->
           <% end %>
           <td><%= project.contact_info %></td>
           <td><%= project.address %></td>

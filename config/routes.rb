@@ -57,9 +57,10 @@ TestApp::Application.routes.draw do
         get 'unassign'
         get 'submit_report'
         patch 'update_answer'
+        get 'categories'
+        get 'checklist'
       end
       collection do 
-
         post 'add_users'
       end
       resources :answers, only: [:update] do
@@ -79,7 +80,6 @@ TestApp::Application.routes.draw do
     resources :reports, only: [] do
       member do
         get 'answers'
-
       end 
       resources :categories, only: [] do
         member do
