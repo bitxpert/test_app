@@ -1,7 +1,7 @@
 class ProjectsController < ApplicationController	
 	before_action :authenticate_user!
 	before_action :check_user
-	before_action :set_project, only: [:show, :edit, :update, :destroy, :detail_report]
+	before_action :set_project, only: [:edit, :update, :destroy, :detail_report]
 	respond_to :html, :json, only: [:index, :new, :create, :edit, :update, :show, :destroy,:assign_project,:add_users,:reports,:users]
 	
 	def index
@@ -18,6 +18,17 @@ class ProjectsController < ApplicationController
 	def new 
 		@project = Project.new
 		respond_with @project
+	end
+
+	def categories
+		@project = Project.find(params[:id])
+		@categories = Category.all
+	end
+
+	def checklist
+		@project = Project.find(params[:id])
+		@reports = @project.reports
+		@category = params[:cat]
 	end
 
 	def submit_report
@@ -98,8 +109,13 @@ class ProjectsController < ApplicationController
 
 	def show
 		# puts "------"*90
-		@categories = Category.all.includes(:questions)
+		# @categories = Category.all.includes(:questions)
+		# @answers = @project.reports.first.answers
+		# respond_with :obj => {project: @project, categories: @categories, answers: @answers}
+		@category = Category.includes(:questions).where(id: params[:cat]).first
+		@project  = Project.find(params[:id])
 		@answers = @project.reports.first.answers
+		@report = Report.find(params[:rep])
 		respond_with :obj => {project: @project, categories: @categories, answers: @answers}
 	end	
 
@@ -169,11 +185,12 @@ class ProjectsController < ApplicationController
 	end	
 
 	def detail_report
+		report = Report.find(params[:report])
   		respond_to do |format|
     		format.html
     		format.json {render :json=> true}
     		format.pdf do
-      		pdf = ProjectDetailPdf.new(@project, view_context)
+      		pdf = ProjectDetailPdf.new(@project, view_context,report)
       		send_data pdf.render, filename: "(#{@project.name}) project report.pdf", type: "application/pdf", disposition: "attachment"
     		end
  		end
