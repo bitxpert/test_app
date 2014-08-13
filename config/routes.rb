@@ -66,6 +66,7 @@ TestApp::Application.routes.draw do
       resources :answers, only: [:update] do
         member do
            patch 'update_answer'
+           patch 'upload_image'
            get 'check_answer'  
         end
       end
