@@ -25,6 +25,15 @@ class AnswersController < ApplicationController
 		end
 	end
 
+	def upload_image
+		answer = Answer.find(params[:id])
+		
+		# answer.notes = params[:answer][:notes]
+		answer.remote_file_url = params[:answer][:file]
+		answer.file = uploaded_picture(params[:answer][:file]) if params[:answer][:file].present?
+		answer.save!
+		return render :json=>{url: answer.file_url}
+	end
 
 	def update_answer
 		puts "-------"*90
@@ -33,7 +42,7 @@ class AnswersController < ApplicationController
 		
 		answer.notes = params[:answer][:notes]
 		# answer.remote_file_url = params[:answer][:file]
-		answer.file = uploaded_picture(params[:answer][:file]) if params[:answer][:file].present?
+		# answer.file = uploaded_picture(params[:answer][:file]) if params[:answer][:file].present?
 		answer.save!
 		return render :json=> true
 	end
