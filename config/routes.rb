@@ -63,7 +63,7 @@ TestApp::Application.routes.draw do
       collection do 
         post 'add_users'
       end
-      resources :answers, only: [:update] do
+      resources :answers, only: [:index,:update] do
         member do
            patch 'update_answer'
            patch 'upload_image'
