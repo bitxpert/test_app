@@ -107,8 +107,10 @@ class IncidentsController < ApplicationController
       format.pdf do
         # if @incident.downloaded.blank?
           pdf = IncidentPdf.new(@incident)
-          file = "#{Rails.root}/public#{@incident.file_url}"
-          pdf.image file, :fit => [450,350] 
+          if @incident.file.present?
+            file = "#{Rails.root}/public#{@incident.file_url}"
+            pdf.image file, :fit => [450,350]
+          end 
           @incident.update!(downloaded: true)
           send_data pdf.render, filename: "(Your new Incident on project #{@incident.project.name}).pdf", type: "application/pdf", disposition: "attachment"
         # else

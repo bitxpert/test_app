@@ -63,12 +63,12 @@ class ProjectsController < ApplicationController
 						project_user.project_id = @project.id
 						project_user.save!
 
-						report = @project.reports.build
-				  		report.name = "#{@project.name} Report #{Date.today.to_s}"
-				  		report.user_id = user.to_i
-				  		report.save!
+						@report = @project.reports.build
+				  		@report.name = "#{@project.name} Report #{Date.today.to_s}"
+				  		@report.user_id = user.to_i
+				  		@report.save!
 					    Question.all.each do |q|
-					      Answer.create!(question_id: q.id, report_id: report.id, file: nil)		
+					      Answer.create!(question_id: q.id, report_id: @report.id, file: nil)		
 						end
 					end	
 				end
@@ -77,12 +77,12 @@ class ProjectsController < ApplicationController
 				# report = Report.find_by_user_id(current_user.id)
 				report = Report.where(user_id: current_user.id, project_id: @project.id).first
 				if !report.present?
-					report = @project.reports.build
-			  		report.name = "#{@project.name} Report #{Date.today.to_s}"
-			  		report.user_id = current_user.id
-			  		report.save!
+					@report = @project.reports.build
+			  		@report.name = "#{@project.name} Report #{Date.today.to_s}"
+			  		@report.user_id = current_user.id
+			  		@report.save!
 				    Question.all.each do |q|
-				      Answer.create!(question_id: q.id, report_id: report.id, file: nil)		
+				      Answer.create!(question_id: q.id, report_id: @report.id, file: nil)		
 					end
 				end
 				# project_user = ProjectsUsers.find_by_user_id(current_user.id) || ProjectsUsers.new
@@ -93,7 +93,13 @@ class ProjectsController < ApplicationController
 			# end
 		flash[:notice] = "Project was successfully created." 
 		end
-		respond_with @project
+
+		respond_to do |format|
+			# flash[:notice] = "Project was successfully created." 
+			format.html { redirect_to categories_project_path(@project), success: "Project successfully created." }
+	        format.json {  render json: @project} 
+		end
+		# respond_with @project
 	end	
 
 	def update_answer
@@ -112,7 +118,11 @@ class ProjectsController < ApplicationController
 		# @categories = Category.all.includes(:questions)
 		# @answers = @project.reports.first.answers
 		# respond_with :obj => {project: @project, categories: @categories, answers: @answers}
-		@category = Category.includes(:questions).where(id: params[:cat]).first
+		# if params[:cat].present?
+			@category = Category.includes(:questions).where(id: params[:cat]).first
+		# else
+			# @category = Category.all
+		# end
 		@project  = Project.find(params[:id])
 		@answers = @project.reports.first.answers
 		@report = Report.find(params[:rep])
