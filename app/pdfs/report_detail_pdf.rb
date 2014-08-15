@@ -29,6 +29,7 @@ class ReportDetailPdf < Prawn::Document
         text "Q: #{q.body}", size: 16, style: :bold
         answer = @answers.find_by(question_id: q.id)
         text "Ans: #{GlobalConstants::Answers::STATUSES[answer.status][0]}", color: "321414"
+        text "Notes: #{answer.notes}"
       end
       move_down 30
     end 
