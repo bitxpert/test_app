@@ -35,9 +35,6 @@ class AnswersController < ApplicationController
 
 	def upload_image
 		answer = Answer.find(params[:id])
-		
-		# answer.notes = params[:answer][:notes]
-		# answer.remote_file_url = params[:answer][:file]
 		answer.file = uploaded_picture(params[:answer][:file]) if params[:answer][:file].present?
 		answer.save!
 		return render :json=>{url: answer.file_url}
