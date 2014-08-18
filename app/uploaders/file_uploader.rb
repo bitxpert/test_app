@@ -19,10 +19,10 @@ class FileUploader < CarrierWave::Uploader::Base
   process :auto_orient # this should go before all other "process" steps
 
   def auto_orient
-manipulate! do |image|
-          image.rotate(90)
-image
-      end
+    manipulate! do |image|
+      image.rotate(90)
+      image
+    end
   end
 
 

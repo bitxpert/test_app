@@ -46,7 +46,7 @@ class AnswersController < ApplicationController
 		answer = Answer.find(params[:id])
 		
 		answer.notes = params[:answer][:notes]
-		answer.remote_file_url = params[:answer][:file]
+		# answer.remote_file_url = params[:answer][:file]
 		answer.file = uploaded_picture(params[:answer][:file]) if params[:answer][:file].present?
 		answer.save!
 		return render :json=> true
@@ -60,7 +60,7 @@ private
 
   	def uploaded_picture(base64)
 
-	    tempfile = Tempfile.new ['upload', 'jpg']
+	    tempfile = Tempfile.new ['upload', '.jpg']
 	    tempfile.binmode
 	    tempfile.write(Base64.decode64(base64))
 
