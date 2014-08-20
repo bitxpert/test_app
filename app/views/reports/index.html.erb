@@ -21,9 +21,11 @@
         <tr>
           <td>
             <% if report.answers.where(status: 2).present? %>
-              <span style="color: red;"><%= "#{report.created_at.strftime("%m/%d/%Y")}" %></span>
+              <%= link_to "#{report.created_at.strftime("%m/%d/%Y")}", categories_project_path(@project, {report: report.id}),style: "color: red;"%>
+              <!-- <span style="color: red;"><%#= "#{report.created_at.strftime("%m/%d/%Y")}" %></span> -->
             <% else %>
-              <%= "#{report.created_at.strftime("%m/%d/%Y")}" %>
+            <%= link_to "#{report.created_at.strftime("%m/%d/%Y")}", categories_project_path(@project, {report: report.id})%>
+              <%#= "#{report.created_at.strftime("%m/%d/%Y")}" %>
             <% end %>
           </td>
           <td>

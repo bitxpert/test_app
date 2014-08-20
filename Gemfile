@@ -28,7 +28,7 @@ gem 'jbuilder', '~> 1.2'
 # Authentication 
 gem 'devise'
 gem 'carrierwave'
-
+gem 'mini_magick'
 # Database
 gem 'mysql2'
 gem 'execjs'

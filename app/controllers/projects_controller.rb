@@ -21,6 +21,9 @@ class ProjectsController < ApplicationController
 	end
 
 	def categories
+		if params[:report].present?
+			@report = Report.find(params[:report])
+		end
 		@project = Project.find(params[:id])
 		@categories = Category.all
 	end

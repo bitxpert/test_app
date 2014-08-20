@@ -46,6 +46,7 @@ TestApp::Application.routes.draw do
     resources :categories, only: [:index] do 
       member do
         get 'questions'
+        get 'question'
       end
     end
     resources :projects do
