@@ -27,6 +27,7 @@ TestApp::Application.routes.draw do
       end
       collection do
         get 'add_user'
+        post 'adduser'
       end
     end
 

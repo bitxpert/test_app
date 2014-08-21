@@ -3,6 +3,7 @@
   # before_filter :admin_or_client_only, only: [:new, :create]
 
   def new
+    @user = User.new
   end
 
   def create
