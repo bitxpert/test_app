@@ -21,9 +21,9 @@ class SessionsController < Devise::SessionsController
 
     resource = User.find_for_database_authentication(email: email) 
     
-    return invalid_login_attempt unless resource
+    # return invalid_login_attempt unless resource
   
-    if resource.valid_password?(password)
+    if resource && resource.valid_password?(password)
       sign_in(resource)
       random = SecureRandom.hex
       resource.tokens << Token.create!(api: random)
