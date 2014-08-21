@@ -3,12 +3,19 @@ class ReportsController < ApplicationController
 	def index
 		id = []
 		@good_report = []
+		cat_names = []
 		@project = Project.find(params[:project_id])
 		@reports = @project.reports.order("created_at ASC")
 		@reports.each do |rep|
 			if !rep.answers.where(status: [0,2,3]).present?
 				id << rep.id
-			end	
+			end
+			choice = Choice.where(checklist_id: rep.id).first	
+			if choice.present?
+				cat_names << Category.find(choice.category_id).name
+			else
+				cat_names << "Not selected"
+			end
 		end
 		if id.length > 0
 			# puts "000"*90
@@ -16,7 +23,7 @@ class ReportsController < ApplicationController
 			@good_report = @project.reports.where(id: id)
 		end
 		# @answers = @project.reports.answers
-		respond_with :obj => {:@project=> @project,:@reports=>@reports, :@good_report=> @good_report }
+		respond_with :obj => {:@project=> @project,:@reports=>@reports, :@good_report=> @good_report, :@cat_names=> cat_names }
 		# respond_with
 	end
 

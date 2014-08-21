@@ -44,12 +44,14 @@ TestApp::Application.routes.draw do
         end
       end
     end
+
     resources :categories, only: [:index] do 
       member do
         get 'questions'
         get 'question'
       end
     end
+
     resources :projects do
       member do 
         get 'detail_report'
@@ -77,7 +79,14 @@ TestApp::Application.routes.draw do
           get 'detail_report'
         end
       end
-      resources :incidents, only: [:new, :create, :index, :show]
+      resources :incidents, only: [:new, :create, :index, :show] do
+        collection do
+          get 'empty_incident'
+        end
+        member do
+          patch 'upload_image'
+        end
+      end
     end
 
     resources :reports, only: [] do

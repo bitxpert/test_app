@@ -29,8 +29,22 @@ class IncidentsController < ApplicationController
   # def edit
   #   respond_with @incident
   #   respond_with @incident
-    
+  def empty_incident
+    project = Project.find(params[:project_id])
+    incident = project.incidents.build
+    incident.save!
+    return render :json=> incident
+  end
   # end
+  def upload_image
+    # project = Project.find(params[:project_id])
+    incident = Incident.find(params[:id])
+    incident.file = uploaded_picture(params[:incident][:file]) if params[:incident][:file].present?
+    incident.save!
+    return render :json=>{url: incident.file_url}
+  end
+
+
 
   # POST /incidents
   # POST /incidents.json
@@ -39,6 +53,10 @@ class IncidentsController < ApplicationController
 
     respond_to do |format|
       if @incident.save
+        @incident.cn = true
+        @incident.save!
+        incidents = @project.incidents.where(cn: false)
+        incidents.destroy_all if incidents.present?
         format.html { redirect_to projects_path({inc: @incident.id}), notice: 'Incident was successfully created.' }
         format.json {  render json: :true}  
         # format.json { render action: 'show', status: :created, location: @incident }
@@ -121,6 +139,18 @@ class IncidentsController < ApplicationController
   end
 
   private
+
+    def uploaded_picture(base64)
+
+      tempfile = Tempfile.new ['upload', '.jpg']
+      tempfile.binmode
+      tempfile.write(Base64.decode64(base64))
+
+      # ActionDispatch::Http::UploadedFile.new(tempfile: tempfile,
+      #   filename: 'upload.jpg')
+      tempfile
+    end
+    
     # Use callbacks to share common setup or constraints between actions.
     def set_project
       @project = current_user.whole_projects.find(params[:project_id])

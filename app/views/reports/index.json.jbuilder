@@ -13,3 +13,9 @@ json.goodreports do |json|
 	  json.name report.name
 	end
 end
+
+json.catnames do |json|
+	json.array!(@cat_names) do |json,cat|
+	  json.name cat.name
+	end
+end

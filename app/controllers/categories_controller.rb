@@ -1,8 +1,17 @@
 class CategoriesController < ApplicationController
 	respond_to :html, :json, only: [:index,:questions,:question]
 	def index
-		@category = Category.all
-		respond_with @category
+		choice = Choice.where(checklist_id: params[:report]).first
+		status = ''
+		if choice.present?
+			@category = Category.find(choice.category_id)
+			status = false
+		else
+			@category = Category.all
+			status = true
+			# respond_with @category
+		end
+		respond_with :obj => { category: @category,  status: status}
 	end
 
 	def answers
@@ -17,8 +26,18 @@ class CategoriesController < ApplicationController
 	end
 
 	def question
+		@status = false
 		@category = Category.find(params[:id])
 		@question = @category.questions.first
+		choice = Choice.where(checklist_id: params[:report]).first
+		if !choice.present?
+			choice = Choice.new
+			choice.checklist_id = params[:report]
+			choice.category_id = @category.id
+			choice.save!
+		else
+			@status = true
+		end
 		@answer = Answer.where(question_id: @question.id, report_id: params[:report]).first
 	end
 end
