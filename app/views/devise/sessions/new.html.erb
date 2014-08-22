@@ -6,7 +6,8 @@
           <img class="profile-img" src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120"
               alt="">
           <%= form_for(resource, as: resource_name, url: session_path(resource_name),:html => {:class => "form-signin"} ) do |f| %>
-	          <%= f.email_field :email, autofocus: true, class: "form-control", placeholder: "Email" %>
+          	  <%= f.text_field :first_name, autofocus: true, class: "form-control", placeholder: "User name" %>	
+	          <%#= f.email_field :email, class: "form-control", placeholder: "Email" %>
 	          <%= f.password_field :password, autocomplete: "off", class: "form-control", placeholder: "Password" %>
 	          <% if devise_mapping.rememberable? %>    
 	          	<label class="checkbox pull-left">

@@ -11,16 +11,19 @@ class SessionsController < Devise::SessionsController
     end
     email = ""
     password = ""
+    username = ""
     if request.format == "json"
       email = params[:data][:user][:email] 
-      password = params[:data][:user][:password] 
+      password = params[:data][:user][:password]
+      username = params[:data][:user][:first_name] 
     else
       email = params[:user][:email]
       password = params[:user][:password]
+      username = params[:user][:first_name]
     end
 
-    resource = User.find_for_database_authentication(email: email) 
-    
+    # resource = User.find_for_database_authentication(email: email) 
+    resource = User.find_for_database_authentication(first_name: username)
     # return invalid_login_attempt unless resource
   
     if resource && resource.valid_password?(password)

@@ -34,7 +34,8 @@ class UsersController < ApplicationController
 		        format.json { render :json=> true }
 	    	end
 		else
-			return render "new"
+			flash[:alert] = "User name must be unique. Try to put same coonfirmation password"
+			redirect_to :back
 		end
 	end
 
@@ -80,17 +81,26 @@ class UsersController < ApplicationController
 		@user.company = params['user']['company']
 		@user.phone = params['user']['phone']
 		@user.address = params['user']['address']
+		# user = @user.save!
+		# puts "00000"*90
+		# puts user
 		if @user.save
+			puts "--------------"
 			@user.role = "client"
 			@user.client_id = @user.id
 			@user.save!
 			notice = true
+	
+			sign_in(@user)
+		    redirect_to users_path, notice: 'User has been added successfully.'
 		else
+			# puts "====================="
 			notice = @user.errors
-		end		
-		
-		sign_in(@user)
-	    redirect_to users_path, notice: 'User has been added successfully.'
+			@user.destroy
+			flash[:alert] = "User name must be unique. Try to put same confirmation password "
+			redirect_to :back
+	    	# redirect_to users_path, notice: 'User has been added successfully.'
+		end			
 	end
 	
 	def index

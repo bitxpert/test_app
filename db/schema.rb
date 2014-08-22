@@ -130,7 +130,7 @@ ActiveRecord::Schema.define(version: 20140821205126) do
     t.string   "address"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["first_name"], name: "index_users_on_first_name", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end
