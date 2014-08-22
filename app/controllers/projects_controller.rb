@@ -2,7 +2,7 @@ class ProjectsController < ApplicationController
 	before_action :authenticate_user!
 	before_action :check_user
 	before_action :set_project, only: [:edit, :update, :destroy, :detail_report]
-	respond_to :html, :json, only: [:index, :new, :create, :edit, :update, :show, :destroy,:assign_project,:add_users,:reports,:users]
+	respond_to :html, :json, only: [:index, :new, :create, :edit, :show, :destroy,:assign_project,:add_users,:reports,:users]
 	
 	def index
 		@projects = current_user.whole_projects
@@ -23,9 +23,14 @@ class ProjectsController < ApplicationController
 	def categories
 		if params[:report].present?
 			@report = Report.find(params[:report])
+			choice = Choice.where(checklist_id: @report.id).first
+			if choice.present?
+				@categories = Category.where(id: choice.category_id)
+			else
+				@categories = Category.all
+			end
 		end
-		@project = Project.find(params[:id])
-		@categories = Category.all
+		@project = Project.find(params[:id])		
 	end
 
 	def checklist
@@ -99,7 +104,7 @@ class ProjectsController < ApplicationController
 
 		respond_to do |format|
 			# flash[:notice] = "Project was successfully created." 
-			format.html { redirect_to categories_project_path(@project), success: "Project successfully created." }
+			format.html { redirect_to report_project_path(@project), success: "Project successfully created." }
 	        format.json {  render json: @project} 
 		end
 		# respond_with @project
@@ -122,13 +127,25 @@ class ProjectsController < ApplicationController
 		# @answers = @project.reports.first.answers
 		# respond_with :obj => {project: @project, categories: @categories, answers: @answers}
 		# if params[:cat].present?
+		@report = Report.find(params[:rep])
+		
+		choice = Choice.where(checklist_id: @report.id).first
+		if choice.present?
+			@category = Category.where(id: choice.category_id).first
+		else
+			# @categories = Category.all
+			choice = Choice.new
+			choice.checklist_id = @report.id
+			choice.category_id = params[:cat]
+			choice.save!
 			@category = Category.includes(:questions).where(id: params[:cat]).first
+		end
+
 		# else
 			# @category = Category.all
 		# end
 		@project  = Project.find(params[:id])
 		@answers = @project.reports.first.answers
-		@report = Report.find(params[:rep])
 		respond_with :obj => {project: @project, categories: @categories, answers: @answers}
 	end	
 
@@ -190,7 +207,11 @@ class ProjectsController < ApplicationController
 
 	def update
     	flash[:notice] = 'Project was successfully updated.' if @project.update(params_project)
-    	return render json: :true	
+    	# return render json: :true	
+    	respond_to do |format|
+    		format.html { redirect_to projects_path, notice: 'Project was successfully updated.'}
+    		format.json {render :json=> true}
+ 		end
 	end
 
 	def destroy

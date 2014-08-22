@@ -68,7 +68,7 @@ class SessionsController < Devise::SessionsController
     
     respond_to do |format|
 	        format.html { redirect_to root_path}
-	        format.json { render :json=> resource }
+	        format.json { render :json=>  true} #resource
 	    end
     
   end

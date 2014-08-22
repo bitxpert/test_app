@@ -21,10 +21,11 @@
     <tbody>
       <% @projects.each do |project|%>
         <tr>
-          <% if project.reports && project.reports.last && project.reports.last.answers && project.reports.last.answers.where(status: 2).present? %>
-          <td><%= link_to project.name, categories_project_path(project),style: "color: red;"%></td>
+          <% if project.reports && project.reports.last && project.reports.last.answers && project.reports.last.answers.where(status: 2).present? %> 
+          <!-- #report_project -->
+          <td><%= link_to project.name, edit_project_path(project),style: "color: red;"%></td>
           <% else %>
-          <td><%= link_to project.name, categories_project_path(project)%></td>
+          <td><%= link_to project.name, edit_project_path(project)%></td>
               <!-- project_path(project) -->
           <% end %>
           <td><%= project.contact_info %></td>

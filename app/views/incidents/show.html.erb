@@ -59,5 +59,10 @@
   <strong>Medical assistance provided:</strong>
   <%= @incident.medical_assistance_provided %>
 </p>
+<strong>Photo:</strong>
+<div>
+  <%= image_tag "#{@incident.file_url}", :style=>"width:150px; height:150px;" %>
+</div>
+<br/><br/>
 
-<%= link_to 'Back', project_incidents_path(@project), class: "btn btn-primary" %>
+<%= link_to 'Back', project_incidents_path(@project), class: "btn btn-primary btn-mini" %>
