@@ -7,7 +7,7 @@ json.reports do |json|
 	    if choice.present?
 			@cat_names = Category.find(choice.category_id).name
 	    else
-			@cat_names << "Not selected"
+			@cat_names = "Not selected"
 		end
 	  json.user_id @answers
 	  json.catname @cat_names
