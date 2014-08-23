@@ -51,6 +51,18 @@ class IncidentsController < ApplicationController
   def create
     if(params[:incId]).present?
       @incident = Incident.find(params[:incId])
+      @incident.report_type = params[:incident][:report_type] 
+      @incident.your_name = params[:incident][:your_name]
+      @incident.job_title = params[:incident][:job_title]
+      @incident.injury_date = params[:incident][:injury_date]
+      @incident.injury_time = params[:incident][:injury_time]
+      @incident.witnesses = params[:incident][:witnesses]
+      @incident.location =params[:incident][:location]
+      @incident.circumstances =  params[:incident][:circumstances]
+      @incident.event_discription = params[:incident][:event_discription]
+      @incident.injuries_type =params[:incident][:injuries_type]
+      @incident.ppe_used =params[:incident][:ppe_used]
+      @incident.medical_assistance_provided =params[:incident][:medical_assistance_provided]
     else
       @incident = @project.incidents.build(incident_params)
     end
