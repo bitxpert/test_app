@@ -49,7 +49,7 @@ class IncidentsController < ApplicationController
   # POST /incidents
   # POST /incidents.json
   def create
-    if(param[:incId]).present?
+    if(params[:incId]).present?
       @incident = Incident.find(params[:incId])
     else
       @incident = @project.incidents.build(incident_params)
