@@ -2,17 +2,17 @@
 
 <p>
   <strong>Report type:</strong>
-  <%= @incident.report_type %>
+  <%= @incident.report_type && @incident.report_type %>
 </p>
 
 <p>
   <strong>Your name:</strong>
-  <%= @incident.your_name %>
+  <%= @incident.your_name && @incident.your_name %>
 </p>
 
 <p>
   <strong>Job title:</strong>
-  <%= @incident.job_title %>
+  <%= @incident.job_title && @incident.job_title %>
 </p>
 
 <p>
@@ -27,32 +27,32 @@
 
 <p>
   <strong>Witnesses:</strong>
-  <%= @incident.witnesses %>
+  <%= @incident.witnesses && @incident.witnesses %>
 </p>
 
 <p>
   <strong>Location:</strong>
-  <%= @incident.location %>
+  <%= @incident.location && @incident.location %>
 </p>
 
 <p>
   <strong>Circumstances:</strong>
-  <%= @incident.circumstances %>
+  <%= @incident.circumstances && @incident.circumstances %>
 </p>
 
 <p>
   <strong>Event discription:</strong>
-  <%= @incident.event_discription %>
+  <%= @incident.event_discription && @incident.event_discription %>
 </p>
 
 <p>
   <strong>Injuries type:</strong>
-  <%= @incident.injuries_type %>
+  <%= @incident.injuries_type && @incident.injuries_type %>
 </p>
 
 <p>
   <strong>Ppe used:</strong>
-  <%= @incident.ppe_used %>
+  <%= @incident.ppe_used && @incident.ppe_used %>
 </p>
 
 <p>
