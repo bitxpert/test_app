@@ -27,7 +27,7 @@ TestApp::Application.configure do
   # number of complex assets.
   ActionMailer::Base.delivery_method = :smtp
   ActionMailer::Base.perform_deliveries = true
-  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  config.action_mailer.default_url_options = { :host => 'codingqna.com:3000' }
   ActionMailer::Base.smtp_settings = {
   :address              => "smtp.mandrillapp.com",
   :port                 => "587",
