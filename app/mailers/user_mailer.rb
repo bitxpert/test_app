@@ -15,6 +15,7 @@ class UserMailer < ActionMailer::Base
     @user = user
     @cname = cname
     @body = body
+    @proj_name = pname
     subject = pname+ " " + "Safety issue"
   	mail(:from=>user.email,:to => to, :subject => subject)
   end

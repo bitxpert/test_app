@@ -35,6 +35,11 @@ class ReportsController < ApplicationController
 		respond_with answer
 	end
 
+	# def unresolved
+	# 	@questions = Question.where(category_id: params[:category])
+	# 	@
+	# end
+
 	def destroy
 		report = Report.find(params[:id])
 		report.destroy

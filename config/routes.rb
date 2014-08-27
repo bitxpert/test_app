@@ -49,6 +49,7 @@ TestApp::Application.routes.draw do
       member do
         get 'questions'
         get 'question'
+        get 'noquestions'
       end
     end
 

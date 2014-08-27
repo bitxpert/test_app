@@ -48,6 +48,7 @@ class UsersController < ApplicationController
 		params['user']=JSON.parse(params['user'])
 		@user.email = params['user']['email']
 		@user.first_name = params['user']['first_name']
+		@user.username = params['user']['username']
 		@user.last_name = params['user']['last_name']
 		@user.password = params['user']['password']
 		@user.password_confirmation = params['user']['password_confirmation']
@@ -71,10 +72,12 @@ class UsersController < ApplicationController
 	def adduser
 		@user = User.new
 		notice = ''
-		# puts "A"*30
+		puts "A"*30
+		puts params['user']['username']
 		# params['user']=JSON.parse(params['user'])
 		@user.email = params['user']['email']
 		@user.first_name = params['user']['first_name']
+		@user.username = params['user']['username']
 		@user.last_name = params['user']['last_name']
 		@user.password = params['user']['password']
 		@user.password_confirmation = params['user']['password_confirmation']
@@ -142,6 +145,6 @@ class UsersController < ApplicationController
 		@user = User.find(params[:id])
 	end
   	def user_params
-    	params.require(:user).permit(:email, :password, :password_confirmation, :first_name, :last_name,:address,:phone,:company)
+    	params.require(:user).permit(:username,:email, :password, :password_confirmation, :first_name, :last_name,:address,:phone,:company)
   	end
 end

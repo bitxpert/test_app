@@ -30,6 +30,14 @@ class CategoriesController < ApplicationController
 		@category = Category.find(params[:id])
 		@question = @category.questions.first
 		choice = Choice.where(checklist_id: params[:report]).first
+
+		# cats = Category.where.not(id: @category.id)
+		# # cats.each do |c|
+		# 	cats.first.questions.each do |q|
+		# 		q.answers.first.destroy if  q.answers.first.present?
+		# 	end
+		# # end
+
 		if !choice.present?
 			choice = Choice.new
 			choice.checklist_id = params[:report]
@@ -39,5 +47,13 @@ class CategoriesController < ApplicationController
 			@status = true
 		end
 		@answer = Answer.where(question_id: @question.id, report_id: params[:report]).first
+	end
+
+	def noquestions
+		@category = Category.find(params[:id])
+		@question = @category.questions.first
+		choice = Choice.where(checklist_id: params[:report]).first
+		@answer = Answer.where(report_id: params[:report], question_id: @question.id).first
+		return render :json=> @answer
 	end
 end

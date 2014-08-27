@@ -7,8 +7,8 @@ class User < ActiveRecord::Base
 
 
 
-  validates_presence_of   :first_name
-  validates_uniqueness_of :first_name
+  validates_presence_of   :username
+  validates_uniqueness_of :username
   validates_presence_of     :password
   validates_confirmation_of :password 
   

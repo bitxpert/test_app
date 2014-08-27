@@ -7,8 +7,11 @@
         <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, class: "form-signin" }) do |f| %>
           <%= devise_error_messages! %>
 
-          <div><%= f.label :email %><br />
-          <%= f.email_field :email, autofocus: true , class: "form-control"%></div>
+          <!-- <div><%#= f.label :email %><br /> -->
+          <!-- <%#= f.text_field :email, autofocus: true , class: "form-control"%></div> -->
+
+          <div><%= f.label :username %><br />
+          <%= f.text_field :username, autofocus: true , class: "form-control"%></div>
 
           <div><%= f.submit "Send me reset password instructions", class: "btn btn-primary" , style: "width:100%;"%></div>
         <% end %>

@@ -1,27 +1,3 @@
-<script type="text/javascript">
-	$(document).ready(function(){
-		// $(".vvv").on('change', function(event) {
-	 //        var $this = $(this),
-  //           val = $this.val();
-
-	 //        val = val.toLowerCase().replace(/\b[a-z]/g, function(letter) {
-	 //            return letter.toUpperCase();
-	 //        }); 
-	 //        console.log(val);
-	 //        $this.val(val);
-  //   	});
-
-		    $('.vvv').on('keypress', function(event) {
-		        var $this = $(this),
-		        val = $this.val();
-
-		        val = val.substr(0, 1).toUpperCase() + val.substr(1).toLowerCase();
-		        $this.val(val);
-		    });
-	});
-</script>
-
-
 <div class="container">
   <div class="row">
     <div class="col-sm-6 col-md-4 col-md-offset-4">
@@ -31,7 +7,7 @@
               alt="">
           <%= form_for(resource, as: resource_name, url: session_path(resource_name),:html => {:class => "form-signin"} ) do |f| %>
           	  
-          	  <%= f.text_field :first_name, class: "form-control vvv", placeholder: "User name"%>	
+          	  <%= f.text_field :username, class: "form-control vvv", placeholder: "User name"%>	
 	          <%#= f.email_field :email, class: "form-control", placeholder: "Email" %>
 	          <%= f.password_field :password, autocomplete: "off", class: "form-control", placeholder: "Password" %>
 	          <% if devise_mapping.rememberable? %>    

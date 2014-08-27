@@ -82,7 +82,6 @@ class ProjectsController < ApplicationController
 				end
 			end
 			# if current_user.role == "user"
-				# report = Report.find_by_user_id(current_user.id)
 				report = Report.where(user_id: current_user.id, project_id: @project.id).first
 				if !report.present?
 					@report = @project.reports.build
@@ -93,7 +92,6 @@ class ProjectsController < ApplicationController
 				      Answer.create!(question_id: q.id, report_id: @report.id, file: nil)		
 					end
 				end
-				# project_user = ProjectsUsers.find_by_user_id(current_user.id) || ProjectsUsers.new
 				project_user = ProjectsUsers.where(user_id:current_user.id, project_id: @project.id).first || ProjectsUsers.new
 				project_user.user_id = current_user.id
 				project_user.project_id = @project.id

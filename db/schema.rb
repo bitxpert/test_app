@@ -120,6 +120,7 @@ ActiveRecord::Schema.define(version: 20140821205126) do
     t.string   "last_sign_in_ip"
     t.string   "first_name"
     t.string   "last_name"
+    t.string   "username"
     t.string   "authentication_token"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -130,7 +131,7 @@ ActiveRecord::Schema.define(version: 20140821205126) do
     t.string   "address"
   end
 
-  add_index "users", ["first_name"], name: "index_users_on_first_name", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
 
 end
