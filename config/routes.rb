@@ -49,7 +49,7 @@ TestApp::Application.routes.draw do
       member do
         get 'questions'
         get 'question'
-        get 'noquestions'
+        get 'no_questions'
       end
     end
 
@@ -83,8 +83,10 @@ TestApp::Application.routes.draw do
       resources :incidents, only: [:new, :create, :index, :show] do
         collection do
           get 'empty_incident'
+
         end
         member do
+           get 'view_incident'
           patch 'upload_image'
         end
       end

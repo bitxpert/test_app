@@ -3,13 +3,18 @@ class IncidentsController < ApplicationController
   before_action :set_project, only: [ :index,:new, :create, :show]
   before_action :set_incident, only: [:show]
 
-  respond_to :html, :json, only: [:index, :new, :show]
+  respond_to :html, :json, only: [:index, :new, :show,:view_incident]
 
   # GET /incidents
   # GET /incidents.json
   def index
     @incidents = @project.incidents
     respond_with @incidents
+  end
+
+  def view_incident
+    @incident = Incident.find(params[:id])
+    respond_with @incident
   end
 
   # GET /incidents/1

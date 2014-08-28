@@ -44,7 +44,7 @@ class AnswersController < ApplicationController
 		puts "-------"*90
 		puts "answer"
 		answer = Answer.find(params[:id])
-		
+		# answer.status = params[:answer][:status]
 		answer.notes = params[:answer][:notes]
 		# answer.remote_file_url = params[:answer][:file]
 		answer.file = uploaded_picture(params[:answer][:file]) if params[:answer][:file].present?
